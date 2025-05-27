@@ -1,2 +1,1 @@
-@tailwind utilities;
-@plugin "daisyui";
+@import "tailwindcss";
