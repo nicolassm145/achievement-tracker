@@ -1,17 +1,15 @@
-import type { ReactNode } from "react";
-import HeaderComponent from "../HeaderComponent";
-import FooterComponent from "../FooterComponent";
+import type { ReactNode } from 'react';
+import HeaderComponent from '../HeaderComponent';
+import FooterComponent from '../FooterComponent';
 
 const SystemLayout = ({ children }: { children: ReactNode }) => {
   return (
-    <div className="min-h-screen flex flex-col">
-      <header className="top-0 z-50 ">
+    <div className="flex min-h-screen flex-col">
+      <header className="top-0 z-50 px">
         <HeaderComponent />
       </header>
-      
-      <main className="flex-1">
-        {children}
-      </main>
+
+      <main className="flex-1">{children}</main>
 
       <footer className="mt-auto">
         <FooterComponent />

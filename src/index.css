@@ -1,1 +1,11 @@
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+@import 'tailwindcss';
+@plugin "daisyui" {
+  themes:
+    light --default,
+    dracula --prefersdark;
+}
+
+@theme {
+  --font-righteous: 'Righteous', cursive;
+}

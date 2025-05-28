@@ -1,13 +1,12 @@
-import SystemLayout from '../../components/Layout/SystemLayout';
+import SystemLayout from "../../components/Layout/SystemLayout";
 
 const HomePage = () => {
-    return (
-        <SystemLayout>
-             <div className="">
-            <h1 className="text-3xl text-center my-10 font-sans ">Trending Games</h1>
-            
-        </div>
-        </SystemLayout>
-    );
-}
+  return (
+    <SystemLayout>
+      <div className="">
+        <h1 className="my-10 text-center font-sans text-3xl">Trending Games</h1>
+      </div>
+    </SystemLayout>
+  );
+};
 export default HomePage;
