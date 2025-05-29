@@ -5,7 +5,6 @@ import {
   BoltIcon,
   TrophyIcon,
 } from '@heroicons/react/24/outline';
-import { ThemeToggle } from './ThemeComponent';
 
 const HeaderComponent: React.FC = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -13,7 +12,7 @@ const HeaderComponent: React.FC = () => {
   return (
     <nav className="navbar bg-base-100 px-4 sm:px-10 lg:px-36">
       <div className="flex-1">
-        <a href="/" className="btn btn-ghost text-lg sm:text-2xl">
+        <a href="/" className="btn btn-ghost text-lg sm:text-3xl">
           <span className="font-righteous hidden sm:inline">NEXUS</span>
           <span className="font-righteous sm:hidden">NEXUS</span>
         </a>
@@ -28,7 +27,7 @@ const HeaderComponent: React.FC = () => {
 
         <a href="/games">
           <button className="btn btn-ghost p-2">
-            <TrophyIcon className="hidden size-5  md:block" />
+            <TrophyIcon className="hidden size-5 md:block" />
           </button>
         </a>
 
@@ -72,25 +71,30 @@ const HeaderComponent: React.FC = () => {
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-48 p-2 shadow-lg sm:w-52"
           >
             <li>
-              <a href="/" className="justify-between">Profile</a>
+              <a href="/" className="justify-between">
+                Profile
+              </a>
             </li>
             <li className="md:hidden">
-              <a href="/games" className="flex items-center gap-2">Games</a>
+              <a href="/games" className="flex items-center gap-2">
+                Games
+              </a>
             </li>
             <li className="md:hidden">
-              <a href="/activity" className="flex items-center gap-2">Activity</a>
+              <a href="/activity" className="flex items-center gap-2">
+                Activity
+              </a>
             </li>
-            
+
             <li>
-              <a href="/setting" >Settings</a>
+              <a href="/setting">Settings</a>
             </li>
             <li>
-              <a href="/login" >Logout</a>
+              <a href="/login">Logout</a>
             </li>
           </ul>
         </div>
       </div>
-  
     </nav>
   );
 };
