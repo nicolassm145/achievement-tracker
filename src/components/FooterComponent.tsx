@@ -1,3 +1,5 @@
+import { ThemeToggle } from "./ThemeComponent";
+
 const FooterComponent = () => {
   return (
     <footer className="px-36 py-2 text-white">
@@ -16,7 +18,7 @@ const FooterComponent = () => {
             Terms of Service
           </a>
         </p>
-        
+        <ThemeToggle />
       </div>
     </footer>
   );
