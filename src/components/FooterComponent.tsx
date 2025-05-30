@@ -21,7 +21,7 @@ const FooterComponent: React.FC = () => {
         </div>
 
         <div className="space-y-1 text-center md:text-left">
-          <p>Your unified achievements hub for Steam, Xbox &amp; PSN.</p>
+          <p>Your unified achievements hub for all your games.</p>
           <p>Copyright © {new Date().getFullYear()} – All rights reserved</p>
         </div>
       </aside>
