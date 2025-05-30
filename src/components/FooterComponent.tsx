@@ -1,6 +1,8 @@
-import { ThemeToggle } from './ThemeComponent';
+import { useTranslation } from 'react-i18next';
 
 const FooterComponent: React.FC = () => {
+  const { t } = useTranslation();
+
   return (
     <footer className="footer bg-base-100 text-base-content flex flex-col items-center gap-8 p-8 sm:px-10 md:flex-row md:items-start md:justify-between md:px-36 lg:px-36">
       {/* 1) Logo + Texto */}
@@ -10,19 +12,25 @@ const FooterComponent: React.FC = () => {
             href="/about"
             className="link link-hover text-base font-bold sm:text-lg"
           >
-            About
+            {t('footer.about')}
           </a>
-          <a href="/terms" className="link link-hover text-base font-bold sm:text-lg">
-            Terms
+          <a
+            href="/terms"
+            className="link link-hover text-base font-bold sm:text-lg"
+          >
+            {t('footer.terms')}
           </a>
-          <a href="/privacy" className="link link-hover text-base font-bold sm:text-lg">
-            Privacy
+          <a
+            href="/privacy"
+            className="link link-hover text-base font-bold sm:text-lg"
+          >
+            {t('footer.privacy')}
           </a>
         </div>
 
         <div className="space-y-1 text-center md:text-left">
-          <p>Your unified achievements hub for all your games.</p>
-          <p>Copyright © {new Date().getFullYear()} – All rights reserved</p>
+          <p>{t('footer.description')}</p>
+          <p>Copyright © {new Date().getFullYear()} - {t('footer.copyright')}</p>
         </div>
       </aside>
 
@@ -80,8 +88,6 @@ const FooterComponent: React.FC = () => {
             </svg>
           </a>
         </div>
-
-        <ThemeToggle />
       </nav>
     </footer>
   );

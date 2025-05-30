@@ -1,13 +1,18 @@
 import { useState } from 'react';
 import avatar from '../assets/avatar.png';
+import { useTranslation } from 'react-i18next';
 import {
   MagnifyingGlassIcon,
   BoltIcon,
   TrophyIcon,
 } from '@heroicons/react/24/outline';
+import { LanguageComponent } from './LanguageComponent';
+import ThemeComponent from './ThemeComponent';
 
 const HeaderComponent: React.FC = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const { i18n } = useTranslation();
+  const { t } = useTranslation();
 
   return (
     <nav className="navbar bg-base-100 px-4 sm:px-10 lg:px-36">
@@ -21,7 +26,7 @@ const HeaderComponent: React.FC = () => {
       <div className="flex items-center gap-2">
         <input
           type="text"
-          placeholder="Search"
+          placeholder={t('header.search')}
           className="input input-bordered input-sm hidden w-64 rounded-full md:block"
         />
 
@@ -49,13 +54,12 @@ const HeaderComponent: React.FC = () => {
             <div className="dropdown-content fixed top-16 left-1/2 z-50 mt-2 w-64 -translate-x-1/2">
               <input
                 type="text"
-                placeholder="Search"
+                placeholder={t('header.search')}
                 className="input input-bordered input-xs w-full rounded-full"
               />
             </div>
           )}
         </div>
-
         <div className="dropdown dropdown-end">
           <div
             tabIndex={0}
@@ -71,26 +75,59 @@ const HeaderComponent: React.FC = () => {
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-48 p-2 shadow-lg sm:w-52"
           >
             <li>
-              <a href="/" className="justify-between">
-                Profile
+              <a href="/" className="justify-between text-sm">
+                {t('header.profile')}
               </a>
             </li>
             <li className="md:hidden">
-              <a href="/games" className="flex items-center gap-2">
-                Games
+              <a href="/games" className="flex items-center gap-2 text-sm">
+                {t('header.games')}
               </a>
             </li>
             <li className="md:hidden">
-              <a href="/activity" className="flex items-center gap-2">
-                Activity
+              <a href="/activity" className="flex items-center gap-2 text-sm">
+                {t('header.activity')}
               </a>
             </li>
 
-            <li>
-              <a href="/setting">Settings</a>
+            <li className="text-sm">
+              <details>
+                <summary className="text-sm">{t('header.settings')}</summary>
+                <ul>
+                  <li>
+                    <a
+                      onClick={() => i18n.changeLanguage('en')}
+                      className="text-sm"
+                    >
+                      {i18n.language === 'en' ? (
+                        <strong>🇺🇸 English</strong>
+                      ) : (
+                        '🇺🇸 English'
+                      )}
+                    </a>
+
+                    <a
+                      onClick={() => i18n.changeLanguage('pt')}
+                      className="text-sm"
+                    >
+                      {i18n.language === 'pt' ? (
+                        <strong>🇧🇷 Português</strong>
+                      ) : (
+                        '🇧🇷 Português'
+                      )}
+                    </a>
+                  </li>
+                  <li>
+                    <ThemeComponent />
+                  </li>
+                </ul>
+              </details>
             </li>
+
             <li>
-              <a href="/login">Logout</a>
+              <a href="/login" className="text-sm">
+                {t('header.logout')}
+              </a>
             </li>
           </ul>
         </div>

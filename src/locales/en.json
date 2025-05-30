@@ -1,0 +1,18 @@
+{
+  "footer": {
+    "description": "Your unified achievements hub for all your games.",
+    "copyright": "All rights reserved.",
+    "company": "Company",
+    "about": "About",
+    "terms": "Terms",
+    "privacy": "Privacy"
+  },
+  "header": {
+    "search": "Search games, platforms....",
+    "settings": "Settings",
+    "logout": "Logout",
+    "profile": "Profile",
+    "games": "Games",
+    "activity": "Activity"
+  }
+}
