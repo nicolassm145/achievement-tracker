@@ -14,5 +14,22 @@
     "profile": "Profile",
     "games": "Games",
     "activity": "Activity"
+  },
+  "auth": {
+    "login": "Login",
+    "register": "Create a new account",
+    "username": "Username",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "email": "Email",
+    "forgotPassword": "Forgot Password?",
+    "rememberMe": "Remember Me",
+    "validation": {
+      "usernameRequired": "Username is required.",
+      "passwordRequired": "Password is required.",
+      "emailRequired": "Email is required.",
+      "emailInvalid": "Email is invalid.",
+      "passwordMatch": "Passwords do not match."
+    }
   }
 }

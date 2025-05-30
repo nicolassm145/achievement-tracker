@@ -1,12 +1,7 @@
 import { useState } from 'react';
 import avatar from '../assets/avatar.png';
 import { useTranslation } from 'react-i18next';
-import {
-  MagnifyingGlassIcon,
-  BoltIcon,
-  TrophyIcon,
-} from '@heroicons/react/24/outline';
-import { LanguageComponent } from './LanguageComponent';
+import { MagnifyingGlassIcon, BoltIcon, TrophyIcon} from '@heroicons/react/24/outline';
 import ThemeComponent from './ThemeComponent';
 
 const HeaderComponent: React.FC = () => {

@@ -13,5 +13,15 @@
     "profile": "Perfil",
     "games": "Jogos",
     "activity": "Atividade"
+  },
+  "auth": {
+    "login": "Entrar",
+    "register": "Criar uma nova conta",
+    "username": "Nome de usuário",
+    "password": "Senha",
+    "confirmPassword": "Confirmar Senha",
+    "email": "Email",
+    "forgotPassword": "Esqueci minha senha?",
+    "rememberMe": "Lembrar-me"
   }
 }
