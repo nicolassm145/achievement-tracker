@@ -36,7 +36,7 @@ export function ThemeToggle() {
 
       <input
         type="checkbox"
-        className="toggle toggle-primary"
+        className="toggle toggle-primary size-xs"
         checked={theme === 'dracula'}
         onChange={toggleTheme}
       />

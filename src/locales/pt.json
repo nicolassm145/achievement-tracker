@@ -1,0 +1,27 @@
+{
+  "footer": {
+    "description": "Seu hub unificado de conquistas para todos os seus jogos.",
+    "copyright": "Todos os direitos reservados.",
+    "about": "Sobre",
+    "terms": "Termos",
+    "privacy": "Política"
+  },
+  "header": {
+    "search": "Pesquisar jogos, plataformas....",
+    "settings": "Configurações",
+    "logout": "Sair",
+    "profile": "Perfil",
+    "games": "Jogos",
+    "activity": "Atividade"
+  },
+  "auth": {
+    "login": "Entrar",
+    "register": "Criar uma nova conta",
+    "username": "Nome de usuário",
+    "password": "Senha",
+    "confirmPassword": "Confirmar Senha",
+    "email": "Email",
+    "forgotPassword": "Esqueci minha senha?",
+    "rememberMe": "Lembrar-me"
+  }
+}
