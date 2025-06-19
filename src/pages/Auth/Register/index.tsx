@@ -1,13 +1,13 @@
-import HeaderComponent from '../../../components/HeaderComponent';
 import { useTranslation } from 'react-i18next';
+import AuthComponent from '../../../components/AuthComponent';
 
 const RegisterPage = () => {
   const { t } = useTranslation();
   return (
     <div className="flex min-h-screen flex-col bg-[url('/registerBG.png')] bg-cover bg-center">
-      <HeaderComponent />
+      <AuthComponent />
       <div className="flex flex-1 items-center justify-center px-4 sm:px-6 md:px-8 lg:px-10">
-        <div className="register-overlay flex w-full max-w-sm flex-col items-center rounded-lg p-6 shadow-md backdrop-blur-sm sm:max-w-md sm:p-8 md:max-w-lg md:p-10 lg:max-w-xl lg:p-12">
+        <div className="register-overlay flex w-full max-w-xs flex-col items-center rounded-lg p-8 shadow-md backdrop-blur-sm sm:max-w-md sm:p-10 md:max-w-lg md:p-12">
           <h1 className="mb-6 text-center text-2xl font-bold tracking-tight">
             {t('auth.register')}
           </h1>
@@ -40,11 +40,6 @@ const RegisterPage = () => {
                 title="Only letters, numbers or dash"
               />
             </label>
-             {/* Dps fazer modal */}
-            <p className="validator-hint hidden">
-              Must be 3 to 30 characters containing only letters, numbers or
-              dash
-            </p>
 
             <label className="input validator">
               <svg
@@ -65,9 +60,6 @@ const RegisterPage = () => {
               </svg>
               <input type="email" placeholder={t('auth.email')} required />
             </label>
-            <div className="validator-hint hidden">
-              Enter valid email address
-            </div>
 
             <label className="input validator">
               <svg
@@ -100,12 +92,49 @@ const RegisterPage = () => {
                 title="Must be more than 8 characters, including number, lowercase letter, uppercase letter"
               />
             </label>
-            <p className="validator-hint hidden">
-              Must be more than 8 characters, including
-              <br />
-              At least one number <br />
-              At least one lowercase letter <br />
-              At least one uppercase letter
+
+            <label className="input validator">
+              <svg
+                className="h-[1em] opacity-50"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+              >
+                <g
+                  strokeLinejoin="round"
+                  strokeLinecap="round"
+                  strokeWidth="2.5"
+                  fill="none"
+                  stroke="currentColor"
+                >
+                  <path d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z"></path>
+                  <circle
+                    cx="16.5"
+                    cy="7.5"
+                    r=".5"
+                    fill="currentColor"
+                  ></circle>
+                </g>
+              </svg>
+              <input
+                type="password"
+                required
+                placeholder={t('auth.confirmPassword')}
+                minLength={8}
+                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                title="Must be more than 8 characters, including number, lowercase letter, uppercase letter"
+              />
+            </label>
+             <button className="btn h- w-1/2 mt-6" type="submit">
+              {t('auth.registerbtn')}
+            </button>
+            <p className="justify-center px-2 text-center text-sm">
+              {t('auth.alreadyHaveAccount')} <br />
+              <a
+                href="/login"
+                className="text-primary hover:text-primary-focus underline"
+              >
+                {t('auth.loginNow')}
+              </a>
             </p>
           </div>
         </div>

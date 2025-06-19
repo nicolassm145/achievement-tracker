@@ -22,6 +22,12 @@
     "confirmPassword": "Confirmar Senha",
     "email": "Email",
     "forgotPassword": "Esqueci minha senha?",
-    "rememberMe": "Lembrar-me"
-  }
+    "rememberMe": "Lembrar-me",
+    "registerbtn": "Registrar",
+    "alreadyHaveAccount": "Já tem uma conta?",
+    "loginBtn": "Entrar",
+    "loginNow": "Entrar Agora",
+    "noAccount": "Não tem uma conta?",
+    "createAccount": "Criar Conta"
+   }
 }

@@ -24,6 +24,12 @@
     "email": "Email",
     "forgotPassword": "Forgot Password?",
     "rememberMe": "Remember Me",
+    "registerbtn": "Register",
+    "alreadyHaveAccount": "Already have an account?",
+    "loginBtn": "Login",
+    "loginNow": "Login Now",
+    "noAccount": "Don't have an account?",
+    "createAccount": "Create Account",
     "validation": {
       "usernameRequired": "Username is required.",
       "passwordRequired": "Password is required.",
