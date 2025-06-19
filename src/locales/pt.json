@@ -14,6 +14,9 @@
     "games": "Jogos",
     "activity": "Atividade"
   },
+   "infoProfile": {
+    "msg": "Bem-vindo de volta!"
+  },
   "auth": {
     "login": "Entrar",
     "register": "Criar uma nova conta",

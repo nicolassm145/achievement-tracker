@@ -2,6 +2,8 @@ import { createBrowserRouter } from 'react-router-dom';
 import HomePage from '../pages/Home';
 import RegisterPage from '../pages/Auth/Register';
 import LoginPage from '../pages/Auth/Login';
+import TitleComponent from '../components/TitleComponent';
+import NotFound from '../pages/NotFound';
 
 const router = createBrowserRouter([
   {
@@ -9,6 +11,7 @@ const router = createBrowserRouter([
     element: (
       <>
         <HomePage />
+        <TitleComponent title="Nexus" />
       </>
     ),
   },
@@ -17,6 +20,7 @@ const router = createBrowserRouter([
     element: (
       <>
         <RegisterPage />
+        <TitleComponent title="Register" />
       </>
     ),
   },
@@ -25,6 +29,16 @@ const router = createBrowserRouter([
     element: (
       <>
         <LoginPage />
+        <TitleComponent title="Login" />
+      </>
+    ),
+  },
+  {
+    path: "*",
+    element: (
+      <>
+        <NotFound />
+        <TitleComponent title="NotFound" />
       </>
     ),
   }

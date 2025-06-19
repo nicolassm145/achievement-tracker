@@ -1,4 +1,3 @@
-// src/pages/Auth/Login/index.tsx
 import { useTranslation } from 'react-i18next';
 import AuthComponent from '../../../components/AuthComponent';
 
@@ -6,11 +5,11 @@ const LoginPage: React.FC = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="flex min-h-screen flex-col bg-[url('/registerBG.png')] bg-cover bg-center">
+    <div className="flex min-h-screen flex-col bg-[url('/loginBG.jpg')] bg-cover bg-center">
       <AuthComponent />
       {/* Container que ocupa o espaço restante e centraliza o card */}
       <div className="flex flex-1 items-center justify-center px-4 sm:px-6 md:px-8 lg:px-10">
-        <form className="register-overlay flex w-full max-w-xs flex-col items-center rounded-lg p-8 shadow-md backdrop-blur-sm sm:max-w-md sm:p-10 md:max-w-lg md:p-12">
+        <form className="register-overlay flex w-full max-w-xs flex-col items-center rounded-lg p-8 shadow-md backdrop-blur-sm sm:max-w-md sm:p-10 md:max-w md:p-12">
           {/* Título da página de login */}
           <h1 className="mb-6 text-center text-2xl font-bold tracking-tight">
             {t('auth.login')}

@@ -15,9 +15,13 @@
     "games": "Games",
     "activity": "Activity"
   },
+  "infoProfile": {
+    "msg": "Welcome Back!"
+  },
   "auth": {
     "login": "Login",
     "register": "Create a new account",
+    "registerTitle": "Register",
     "username": "Username",
     "password": "Password",
     "confirmPassword": "Confirm Password",
