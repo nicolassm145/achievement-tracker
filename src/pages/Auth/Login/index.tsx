@@ -9,9 +9,11 @@ const LoginPage: React.FC = () => {
       <AuthComponent />
       {/* Container que ocupa o espaço restante e centraliza o card */}
       <div className="flex flex-1 items-center justify-center px-4 sm:px-6 md:px-8 lg:px-10">
-        <form className="register-overlay flex w-full max-w-xs flex-col items-center rounded-lg p-8 shadow-md backdrop-blur-sm sm:max-w-md sm:p-10 md:max-w md:p-12">
-          {/* Título da página de login */}
-          <h1 className="mb-6 text-center text-2xl font-bold tracking-tight">
+        <form className="register-overlay md:max-w flex w-full max-w-xs flex-col items-center rounded-lg p-8 shadow-md backdrop-blur-sm sm:max-w-md sm:p-10 md:p-12">
+          <a href="/" >
+            <h1 className="font-righteous text-5xl ">NEXUS</h1>
+          </a>
+          <h1 className="mt-10 mb-6 text-center text-2xl font-bold tracking-tight">
             {t('auth.login')}
           </h1>
 

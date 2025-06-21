@@ -8,7 +8,10 @@ const RegisterPage = () => {
       <AuthComponent />
       <div className="flex flex-1 items-center justify-center px-4 sm:px-6 md:px-8 lg:px-10">
         <div className="register-overlay flex w-full max-w-xs flex-col items-center rounded-lg p-8 shadow-md backdrop-blur-sm sm:max-w-md sm:p-10 md:max-w-lg md:p-12">
-          <h1 className="mb-6 text-center text-2xl font-bold tracking-tight">
+          <a href="/">
+            <h1 className="font-righteous text-5xl">NEXUS</h1>
+          </a>
+          <h1 className="mt-10 mb-6 text-center text-2xl font-bold tracking-tight">
             {t('auth.register')}
           </h1>
 
@@ -124,7 +127,7 @@ const RegisterPage = () => {
                 title="Must be more than 8 characters, including number, lowercase letter, uppercase letter"
               />
             </label>
-             <button className="btn h- w-1/2 mt-6" type="submit">
+            <button className="btn h- mt-6 w-1/2" type="submit">
               {t('auth.registerbtn')}
             </button>
             <p className="justify-center px-2 text-center text-sm">

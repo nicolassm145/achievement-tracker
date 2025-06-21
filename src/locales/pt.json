@@ -14,8 +14,29 @@
     "games": "Jogos",
     "activity": "Atividade"
   },
-   "infoProfile": {
-    "msg": "Bem-vindo de volta!"
+  "infoProfile": {
+    "msg": "Bem-vindo de volta!",
+    "profile": "Estatísticas do Perfil",
+    "latestGames": "Últimos Jogos",
+    "ownedGames": "Jogos",
+    "completedGames": "Concluídos",
+    "trophies": "Conquistas",
+    "hoursPlayed": "Horas",
+    "playing": "Jogando",
+    "average": "% Média",
+    "tipsGame": "Jogos que você possui",
+    "tipsTrophy": "Conquistas que você ganhou",
+    "tipsHours": "Total de horas jogadas em todos os jogos",
+    "tipsCompleted": "Jogos que você concluiu",
+    "tipsAverage": "Média de porcentagem de conquistas ganhas em seus jogos",
+    "tipsPlaying": "Jogos que você está jogando atualmente"
+  },
+  "homePage": {
+    "trending": "Tendências Recentes",
+    "trendingDescription": "Confira os últimos jogos em alta na comunidade!",
+    "comingSoon": "Em Breve",
+    "mostAnticipated": "Mais Esperados",
+    "seeMore": "Ver Mais"
   },
   "auth": {
     "login": "Entrar",
@@ -32,5 +53,5 @@
     "loginNow": "Entrar Agora",
     "noAccount": "Não tem uma conta?",
     "createAccount": "Criar Conta"
-   }
+  }
 }

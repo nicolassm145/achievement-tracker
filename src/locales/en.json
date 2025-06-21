@@ -16,7 +16,28 @@
     "activity": "Activity"
   },
   "infoProfile": {
-    "msg": "Welcome Back!"
+    "msg": "Welcome Back!",
+    "profile": "Profile Stats",
+    "latestGames": "Latest Games",
+    "ownedGames": "Games",
+    "completedGames": "Completed",
+    "trophies": "Trophies",
+    "hoursPlayed": "Hours",
+    "playing": "Playing",
+    "average": "% Average",
+    "tipsGame": "Games you own",
+    "tipsTrophy": "Trophies you have earned",
+    "tipsHours": "Total hours played across all games",
+    "tipsCompleted": "Games you have completed",
+    "tipsAverage": "Average percentage of trophies earned in your games",
+    "tipsPlaying": "Games you are currently playing"
+  },
+  "homePage": {
+    "trending": "Recently Trending",
+    "trendingDescription": "Check out the latest trending games in the community!",
+    "comingSoon": "Coming Soon",
+    "mostAnticipated": "Most Anticipated",
+    "seeMore": "See More"
   },
   "auth": {
     "login": "Login",
