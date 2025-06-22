@@ -1,7 +1,11 @@
 import { useState } from 'react';
 import avatar from '../assets/avatar.png';
 import { useTranslation } from 'react-i18next';
-import { MagnifyingGlassIcon, BoltIcon, TrophyIcon} from '@heroicons/react/24/outline';
+import {
+  MagnifyingGlassIcon,
+  BoltIcon,
+  TrophyIcon,
+} from '@heroicons/react/24/outline';
 import ThemeComponent from './ThemeComponent';
 
 const HeaderComponent: React.FC = () => {
@@ -10,7 +14,7 @@ const HeaderComponent: React.FC = () => {
   const { t } = useTranslation();
 
   return (
-    <nav className="navbar bg-base-100 px-4 sm:px-10 lg:px-36">
+    <nav className="navbar bg-base-100/50 px-4 sm:px-10 lg:px-36">
       <div className="flex-1">
         <a href="/" className="btn btn-ghost text-lg sm:text-3xl">
           <span className="font-righteous hidden sm:inline">NEXUS</span>
@@ -42,7 +46,7 @@ const HeaderComponent: React.FC = () => {
             className="btn btn-ghost p-2"
             onClick={() => setIsSearchOpen((prev) => !prev)}
           >
-            <MagnifyingGlassIcon className="h-6 w-6 text-white" />
+            <MagnifyingGlassIcon className="h-6 w-6" />
           </button>
 
           {isSearchOpen && (
@@ -70,7 +74,7 @@ const HeaderComponent: React.FC = () => {
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-48 p-2 shadow-lg sm:w-52"
           >
             <li>
-              <a href="/" className="justify-between text-sm">
+              <a href="/profile" className="justify-between text-sm">
                 {t('header.profile')}
               </a>
             </li>
