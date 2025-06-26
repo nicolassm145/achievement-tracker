@@ -15,32 +15,22 @@ const ProfilePage = () => {
 
       <div className="relative mx-auto -mt-28 px-4 sm:-mt-32 sm:px-8 md:-mt-36 lg:-mt-40 lg:px-36">
         <div className="profile-card rounded-lg p-6 shadow-xl">
-          <div className="flex flex-col items-center space-y-4 sm:flex-row sm:items-start sm:space-y-0 sm:space-x-6">
+          <div className="flex flex-col items-center space-y-4 sm:flex-row md:items-start sm:space-y-0 sm:space-x-6">
             <img
               alt="Avatar do usuário"
               src={avatar}
-              className="h-32 w-32 rounded -mt-20 border-4 border-base-100 shadow-md"
+              className="border-base-100 -mt-20 h-32 w-32 rounded border-4 shadow-md"
             />
 
             <div>
-              <h1 className="text-2xl -ml-1 -mt-15 font-bold">Usuário</h1>
+              <h1 className="-ml-1 text-xl font-bold sm:-mt-16 sm:text-2xl md:text-3xl lg:-mt-15">
+                Usuário
+              </h1>
             </div>
           </div>
 
           <div className="mt-6">
             <p>aaaaaaa</p>
-          </div>
-          <div>
-            <p className="text-sm text-gray-500">aaaaaaa</p>
-          </div>
-          <div>
-            <p className="text-sm text-gray-500">aaaaaaa</p>
-          </div>
-          <div>
-            <p className="text-sm text-gray-500">aaaaaaa</p>
-          </div>
-          <div>
-            <p className="text-sm text-gray-500">aaaaaaa</p>
           </div>
         </div>
       </div>

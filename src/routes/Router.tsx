@@ -5,6 +5,9 @@ import LoginPage from '../pages/Auth/Login';
 import TitleComponent from '../components/TitleComponent';
 import NotFound from '../pages/NotFound';
 import ProfilePage from '../pages/Profile';
+import TermsPage from '../pages/Terms';
+import AboutPage from '../pages/About';
+import PrivacyPage from '../pages/Privacy';
 
 const router = createBrowserRouter([
   {
@@ -49,6 +52,33 @@ const router = createBrowserRouter([
       <>
         <ProfilePage />
         <TitleComponent title="Profile" />
+      </>
+    ),
+  },
+  {
+    path: '/terms',
+    element: (
+      <>
+          <TermsPage />
+          <TitleComponent title="Terms" />
+      </>
+    ),
+  },
+  {
+    path: '/about',
+    element: (
+      <>
+          <AboutPage />
+          <TitleComponent title="About" />
+      </>
+    ),
+  },
+  {
+    path: '/privacy',
+    element: (
+      <>
+          <PrivacyPage />
+          <TitleComponent title="Privacy" />
       </>
     ),
   }

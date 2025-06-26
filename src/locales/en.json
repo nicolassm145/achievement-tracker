@@ -62,5 +62,51 @@
       "emailInvalid": "Email is invalid.",
       "passwordMatch": "Passwords do not match."
     }
+  },
+  "about": {
+    "title": "About",
+    "description01": "Welcome to Nexus, your ultimate hub for tracking game achievements across the major platforms: Steam, PlayStation Network, and Xbox Live. Whether you're celebrating personal milestones or comparing your stats with the community, we've centralized everything in one place.",
+    "description02": "Our mission is to deliver an intuitive, real-time interface so you never miss a trophy or important achievement. If you have suggestions, feedback, or would like to contribute to the project, please get in touch with the developers below:"
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "intro": "We respect your privacy and are committed to protecting the personal information you share with us. In this policy, we explain what data we collect, how we use it, and your choices.",
+    "section1": {
+      "title": "1. Data We Collect",
+      "items": [
+        "Account information (name, email, avatar).",
+        "Game platform data (Steam, PSN, Xbox) when connected.",
+        "Preferences and usage history to improve our experience."
+      ]
+    },
+    "section2": {
+      "title": "2. How We Use It",
+      "items": [
+        "To display your achievements in real time.",
+        "To send notifications about milestones and updates.",
+        "To enhance and personalize features."
+      ]
+    },
+    "contact": "To exercise any of these rights, please contact us at our support team."
+  },
+  "terms": {
+    "title": "Terms of Service",
+    "intro": "By using our site to track gaming achievements, you agree to these Terms of Service. Please read carefully before proceeding.",
+    "section1": {
+      "title": "1. Platform Usage",
+      "items": [
+        "You must have valid accounts on supported platforms (Steam, PSN, Xbox).",
+        "Unauthorized bots or scrapers for data collection are prohibited.",
+        "Any malicious or fraudulent use will result in a ban."
+      ]
+    },
+    "section2": {
+      "title": "2. Intellectual Property",
+      "text": "All content, design, and code of this application are protected by copyright and belong to our team. Copying, modifying, or distributing without permission is prohibited."
+    },
+    "section3": {
+      "title": "3. Disclaimer of Liability",
+      "text": "We do not guarantee uninterrupted availability of third-party APIs (Steam, PSN, Xbox). Any outages are beyond our control."
+    }
   }
 }

@@ -34,12 +34,11 @@ const FooterComponent: React.FC = () => {
         </div>
       </aside>
 
-      {/* 3) Social + ThemeToggle */}
       <nav className="flex flex-col items-center gap-4">
         <div className="flex space-x-4">
           {/* Email */}
           <a
-            href="#"
+            href="/about"
             aria-label="Custom Icon"
             className="text-base-content fill-current"
           >
@@ -65,7 +64,7 @@ const FooterComponent: React.FC = () => {
           </a>
           {/* Linkedin */}
           <a
-            href="#"
+            href="/about"
             aria-label="Linkedin"
             className="text-base-content fill-current"
           >
@@ -79,8 +78,8 @@ const FooterComponent: React.FC = () => {
           </a>
           {/* Github */}
           <a
-            href="#"
-            aria-label="Facebook"
+            href="/about"
+            aria-label="Github"
             className="text-base-content fill-current"
           >
             <svg width="24" height="24" viewBox="0 0 24 24">
