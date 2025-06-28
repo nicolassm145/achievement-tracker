@@ -63,6 +63,15 @@
       "passwordMatch": "Passwords do not match."
     }
   },
+  "anticipatedGames": {
+    "title": "Anticipated Games",
+    "description": "These are the most anticipated releases"
+
+  },
+  "comingSoon": {
+    "title": "Upcoming Games",
+    "description": "These games are releasing soon"
+  },
   "about": {
     "title": "About",
     "description01": "Welcome to Nexus, your ultimate hub for tracking game achievements across the major platforms: Steam, PlayStation Network, and Xbox Live. Whether you're celebrating personal milestones or comparing your stats with the community, we've centralized everything in one place.",

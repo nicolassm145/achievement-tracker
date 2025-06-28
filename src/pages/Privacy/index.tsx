@@ -1,4 +1,3 @@
-// src/pages/PrivacyPage.tsx
 import { useTranslation } from 'react-i18next';
 import HeaderComponent from '../../components/HeaderComponent';
 
@@ -29,8 +28,7 @@ const PrivacyPage = () => {
               <li key={i}>{item}</li>
             ))}
           </ul>
-
-          {/* Seção 2 */}
+          
           <h2 className="mb-2 text-base font-bold sm:text-lg">
             {t('privacy.section2.title')}
           </h2>

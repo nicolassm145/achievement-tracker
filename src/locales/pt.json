@@ -54,6 +54,14 @@
     "noAccount": "Não tem uma conta?",
     "createAccount": "Criar Conta"
   },
+  "anticipatedGames": {
+    "title": "Jogos Antecipados",
+    "description": "Estes são os lançamentos mais esperados"
+  },
+  "comingSoon": {
+    "title": " Jogos em Breve",
+    "description": "Estes jogos serão lançados em breve"
+  },
   "about": {
     "title": "Sobre",
     "description01": "Bem-vindo ao Nexus, seu hub definitivo para acompanhar conquistas de jogos nas  principais plataformas: Steam, PlayStation Network e Xbox Live. Seja para celebrar marcos pessoais ou comparar suas estatísticas com a comunidade, nós centralizamos tudo em um só lugar",

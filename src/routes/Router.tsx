@@ -8,6 +8,9 @@ import ProfilePage from '../pages/Profile';
 import TermsPage from '../pages/Terms';
 import AboutPage from '../pages/About';
 import PrivacyPage from '../pages/Privacy';
+import ComingSoonPage from '../pages/ComingSoon';
+import AnticipatedPage from '../pages/Anticipated';
+
 
 const router = createBrowserRouter([
   {
@@ -79,6 +82,24 @@ const router = createBrowserRouter([
       <>
           <PrivacyPage />
           <TitleComponent title="Privacy" />
+      </>
+    ),
+  },
+  {
+    path: '/coming-soon',
+    element: (
+      <>
+        <ComingSoonPage />
+        <TitleComponent title="Coming Soon" />
+      </>
+    ),
+  },
+  {
+    path: '/anticipated',
+    element: (
+      <>
+        <AnticipatedPage />
+        <TitleComponent title="Anticipaded" />
       </>
     ),
   }
