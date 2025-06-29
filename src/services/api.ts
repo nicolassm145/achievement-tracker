@@ -28,7 +28,8 @@ api.interceptors.response.use(
         message: error.message,
       });
     }
-  }
+  },
+  
 );
 
 export default api;

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { TrendingSkeleton } from './Loading/TrendingSkeleton';
+import { Link } from 'react-router-dom';
 
 interface Game {
   id: number;
@@ -49,19 +50,22 @@ const TrendingGamesComponent: React.FC = () => {
       <div className="carousel carousel-center max-w-full space-x-4 p-2">
         {games.map((game) => (
           <div key={game.id} className="carousel-item w-40">
-            <div className="group relative overflow-hidden rounded-xl">
-              <img
-                src={game.cover_url}
-                alt={game.name}
-                className="h-56 w-40 object-cover transition-transform duration-200 group-hover:scale-105"
-              />
+            {/* 2. Envolva o conteúdo do card com Link */}
+            <Link to={`/games/${game.id}`} className="block h-full">
+              <div className="group relative overflow-hidden rounded-xl">
+                <img
+                  src={game.cover_url}
+                  alt={game.name}
+                  className="h-56 w-40 object-cover transition-transform duration-200 group-hover:scale-105"
+                />
 
-              <div className="absolute inset-0 bg-black/0 transition-all duration-300 group-hover:bg-black/50" />
-              
-              <span className="absolute inset-0 flex items-center justify-center px-2 text-center text-sm font-semibold text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                {game.name}
-              </span>
-            </div>
+                <div className="absolute inset-0 bg-black/0 transition-all duration-300 group-hover:bg-black/50" />
+                
+                <span className="absolute inset-0 flex items-center justify-center px-2 text-center text-sm font-semibold text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                  {game.name}
+                </span>
+              </div>
+            </Link>
           </div>
         ))}
       </div>

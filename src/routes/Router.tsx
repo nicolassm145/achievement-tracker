@@ -10,6 +10,7 @@ import AboutPage from '../pages/About';
 import PrivacyPage from '../pages/Privacy';
 import ComingSoonPage from '../pages/ComingSoon';
 import AnticipatedPage from '../pages/Anticipated';
+import GamePage from '../pages/Games';
 
 
 const router = createBrowserRouter([
@@ -100,6 +101,15 @@ const router = createBrowserRouter([
       <>
         <AnticipatedPage />
         <TitleComponent title="Anticipaded" />
+      </>
+    ),
+  },
+  { 
+    path: '/games/:gameId',
+    element: (
+      <>
+        <GamePage />
+        <TitleComponent title="Game Details" />
       </>
     ),
   }
