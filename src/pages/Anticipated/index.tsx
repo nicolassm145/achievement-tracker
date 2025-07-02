@@ -1,8 +1,10 @@
+import React from "react";
+import { Link } from "react-router-dom";
 import SystemLayout from "../../components/Layout/SystemLayout";
 import { useAnticipatedGames } from "../../hooks/useAnticipatedGames";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
-const AnticipatedPage = () => {
+const AnticipatedPage: React.FC = () => {
   const { t } = useTranslation();
   const { games, loading, error } = useAnticipatedGames();
 
@@ -14,7 +16,7 @@ const AnticipatedPage = () => {
             <h2 className="text-2xl sm:text-3xl font-bold mb-2">
               {t("anticipatedGames.title")}
             </h2>
-            <p className="text-sm text-gray-400 ">
+            <p className="text-sm text-gray-400">
               {t("anticipatedGames.description")}
             </p>
           </div>
@@ -31,8 +33,9 @@ const AnticipatedPage = () => {
         {!loading && !error && (
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
             {games.map((game) => (
-              <div
+              <Link
                 key={game.id}
+                to={`/games/${game.id}`}
                 className="card bg-base-200 shadow-sm hover:shadow-md transition-shadow group"
               >
                 <figure className="relative w-full aspect-[3/4] bg-base-300 overflow-hidden">
@@ -60,7 +63,7 @@ const AnticipatedPage = () => {
                     })}
                   </p>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         )}

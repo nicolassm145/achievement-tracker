@@ -8,7 +8,7 @@ const InfoComponent: React.FC = () => {
     <section className="text-base-content">
       <div className="container mx-auto mt-10 px-4">
         <p className="mb-6 text-center text-base sm:text-lg">
-          {t('infoProfile.msg')}
+          {t('infoProfile.msg')} 
         </p>
 
         <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
@@ -20,7 +20,7 @@ const InfoComponent: React.FC = () => {
               >
                 {t('infoProfile.ownedGames')}
               </div>
-              <div className="text-sm font-bold sm:text-lg">728</div>
+              <div className="text-sm font-bold sm:text-lg">0</div>
             </div>
 
             <div className="space-y-1 text-center">
@@ -30,7 +30,7 @@ const InfoComponent: React.FC = () => {
               >
                 {t('infoProfile.completedGames')}
               </div>
-              <div className="text-sm font-bold sm:text-lg">142</div>
+              <div className="text-sm font-bold sm:text-lg">0</div>
             </div>
 
             <div className="space-y-1 text-center">
@@ -40,7 +40,7 @@ const InfoComponent: React.FC = () => {
               >
                 {t('infoProfile.playing')}
               </div>
-              <div className="text-sm font-bold sm:text-lg">17</div>
+              <div className="text-sm font-bold sm:text-lg">0</div>
             </div>
 
             <div className="space-y-1 text-center">
@@ -50,7 +50,7 @@ const InfoComponent: React.FC = () => {
               >
                 {t('infoProfile.trophies')}
               </div>
-              <div className="text-sm font-bold sm:text-lg">9.388</div>
+              <div className="text-sm font-bold sm:text-lg">0</div>
             </div>
 
             <div className="space-y-1 text-center">
@@ -60,7 +60,7 @@ const InfoComponent: React.FC = () => {
               >
                 {t('infoProfile.hoursPlayed')}
               </div>
-              <div className="text-sm font-bold sm:text-lg">9.773</div>
+              <div className="text-sm font-bold sm:text-lg">0</div>
             </div>
 
             <div className="space-y-1 text-center">
@@ -70,7 +70,7 @@ const InfoComponent: React.FC = () => {
               >
                 {t('infoProfile.average')}
               </div>
-              <div className="text-sm font-bold sm:text-lg">53%</div>
+              <div className="text-sm font-bold sm:text-lg">0</div>
             </div>
             
             <div className="col-span-full flex justify-center text-sm sm:text-base">

@@ -16,7 +16,7 @@
     "activity": "Activity"
   },
   "infoProfile": {
-    "msg": "Welcome Back!",
+    "msg": "Welcome Back! ",
     "profile": "Profile Stats",
     "latestGames": "Latest Games",
     "ownedGames": "Games",
@@ -71,6 +71,13 @@
   "comingSoon": {
     "title": "Upcoming Games",
     "description": "These games are releasing soon"
+  },
+  "gameDetails": {
+    "overview": "Overview",
+    "platforms": "Platforms",
+    "releaseDate": "Released on",
+    "genres": "Genres",
+    "similarGames": "Similar Games"
   },
   "about": {
     "title": "About",

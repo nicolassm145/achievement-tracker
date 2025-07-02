@@ -1,4 +1,4 @@
-// src/components/ErrorMessage.tsx
+
 export default function ErrorMessage({ message }: { message: string }) {
   return (
     <div className="max-w-2xl mx-auto mt-12 p-6 bg-error/10 rounded-lg">

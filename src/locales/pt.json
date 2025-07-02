@@ -62,6 +62,13 @@
     "title": " Jogos em Breve",
     "description": "Estes jogos serão lançados em breve"
   },
+  "gameDetails": {
+    "overview": "Resumo",
+    "platforms": "Plataformas",
+    "releaseDate": "Lançado em",
+    "genres": "Gêneros",
+    "similarGames": "Jogos Similares"
+  },
   "about": {
     "title": "Sobre",
     "description01": "Bem-vindo ao Nexus, seu hub definitivo para acompanhar conquistas de jogos nas  principais plataformas: Steam, PlayStation Network e Xbox Live. Seja para celebrar marcos pessoais ou comparar suas estatísticas com a comunidade, nós centralizamos tudo em um só lugar",
