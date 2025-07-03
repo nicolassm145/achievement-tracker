@@ -3,16 +3,45 @@ import SystemLayout from '../../components/Layout/SystemLayout';
 import avatar from '../../assets/avatar.png';
 import { useAuth } from '../../contexts/AuthContext';
 import { AdjustmentsHorizontalIcon } from '@heroicons/react/24/outline';
+import axios from 'axios';
 
 const SettingsPage: React.FC = () => {
   const { user, loading } = useAuth();
   const [steamId, setSteamId] = useState('');
   const [xboxId, setXboxId] = useState('');
   const [psnId, setPsnId] = useState('');
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSave = () => {
-    // aqui você envia steamId, xboxId e psnId para seu back
-    console.log({ steamId, xboxId, psnId });
+  const handleSave = async () => {
+    setError(null);
+    setSaving(true);
+
+    try {
+      const token = localStorage.getItem('access_token');
+      const response = await axios.post(
+        'http://localhost:8000/steam/save-steamid',
+        {},
+        {
+          params: { vanity_url: steamId },
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const data = response.data as { steamid: string };
+      console.log('SteamID salvo no back:', data.steamid);
+    } catch (err: any) {
+      console.error(err);
+      setError(
+        err.response?.data?.detail ||
+          err.message ||
+          'Ocorreu um erro ao salvar o SteamID'
+      );
+    } finally {
+      setSaving(false);
+    }
   };
 
   if (loading) {
@@ -108,10 +137,17 @@ const SettingsPage: React.FC = () => {
             </div>
 
             <div className="flex w-full justify-end sm:w-3/4 md:w-1/2 lg:w-1/3">
-              <button type="submit" className="btn btn-primary">
-                Salvar alterações
+              <button
+                type="submit"
+                className="btn btn-primary"
+                disabled={saving}
+              >
+                {saving ? 'Salvando…' : 'Salvar alterações'}
               </button>
             </div>
+
+            {/* Mensagem de Erro */}
+            {error && <p className="mt-2 text-sm text-red-500">❌ {error}</p>}
           </form>
         </div>
       </div>
