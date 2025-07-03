@@ -1,7 +1,20 @@
 import SystemLayout from '../../components/Layout/SystemLayout';
 import avatar from '../../assets/avatar.png';
+import { useAuth } from '../../contexts/AuthContext';
 
-const ProfilePage = () => {
+const ProfilePage: React.FC = () => {
+  const { user, loading } = useAuth();
+
+  if (loading) {
+    return (
+      <SystemLayout>
+        <div className="flex h-64 items-center justify-center">
+          Carregando perfil...
+        </div>
+      </SystemLayout>
+    );
+  }
+
   return (
     <SystemLayout>
       <div className="relative -mt-20 h-54 w-full sm:h-64 md:h-96 lg:h-128">
@@ -14,8 +27,8 @@ const ProfilePage = () => {
       </div>
 
       <div className="relative mx-auto -mt-8 px-4 sm:-mt-32 sm:px-8 md:-mt-36 lg:-mt-40 lg:px-36">
-        <div className="profile-card rounded-lg md:p-6 shadow-xl">
-          <div className="flex flex-col items-center space-y-4 sm:flex-row md:items-start sm:space-y-0 sm:space-x-6">
+        <div className="profile-card rounded-lg shadow-xl md:p-6">
+          <div className="flex flex-col items-center space-y-4 sm:flex-row sm:space-y-0 sm:space-x-6 md:items-start">
             <img
               alt="Avatar do usuário"
               src={avatar}
@@ -24,13 +37,12 @@ const ProfilePage = () => {
 
             <div>
               <h1 className="-ml-1 text-xl font-bold sm:-mt-16 sm:text-2xl md:text-3xl lg:-mt-15">
-                Novo Usuário
+                {user?.username ?? 'Usuário'}
               </h1>
             </div>
           </div>
 
-          <div className="mt-6">
-          </div>
+          <div className="mt-6"></div>
         </div>
       </div>
     </SystemLayout>

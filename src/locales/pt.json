@@ -7,12 +7,23 @@
     "privacy": "Política"
   },
   "header": {
-    "search": "Pesquisar jogos, plataformas....",
+    "search": "Pesquisar jogos....",
     "settings": "Configurações",
     "logout": "Sair",
     "profile": "Perfil",
     "games": "Jogos",
-    "activity": "Atividade"
+    "activity": "Atividade",
+    "loading": "Carregando...",
+    "preferences": "Preferências"
+  },
+  "search": {
+    "title": "Resultados da pesquisa para:",
+    "description": "Navegue pelos jogos que correspondem à sua consulta.",
+    "loading": "Carregando jogos...",
+    "error": "Ocorreu um erro ao buscar resultados.",
+    "noResults": "Nenhum jogo encontrado.",
+    "backHome": "Voltar para a página inicial",
+    "noCover": "Sem Capa"
   },
   "infoProfile": {
     "msg": "Bem-vindo de volta!",

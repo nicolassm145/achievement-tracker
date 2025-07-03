@@ -8,12 +8,23 @@
     "privacy": "Privacy"
   },
   "header": {
-    "search": "Search games, platforms....",
+    "search": "Search games....",
     "settings": "Settings",
     "logout": "Logout",
     "profile": "Profile",
     "games": "Games",
-    "activity": "Activity"
+    "activity": "Activity",
+    "loading": "Loading...",
+    "preferences": "Preferences"
+  },
+  "search": {
+    "title": "Search results for:",
+    "description": "Browse games matching your query.",
+    "loading": "Loading games...",
+    "error": "An error occurred while fetching results.",
+    "noResults": "No games found.",
+    "backHome": "Back to home",
+    "noCover": "No Cover"
   },
   "infoProfile": {
     "msg": "Welcome Back! ",

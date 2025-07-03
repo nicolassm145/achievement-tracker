@@ -32,4 +32,16 @@ api.interceptors.response.use(
   
 );
 
+// ao logar:
+export function setToken(token: string) {
+  localStorage.setItem("access_token", token);
+  api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+}
+
+// ao iniciar a aplicação, se já houver token:
+const token = localStorage.getItem("access_token");
+if (token) {
+  api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+}
+
 export default api;

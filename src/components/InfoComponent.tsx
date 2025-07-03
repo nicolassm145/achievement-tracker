@@ -1,14 +1,17 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useAuth } from '../contexts/AuthContext';
 
 const InfoComponent: React.FC = () => {
   const { t } = useTranslation();
+  const { user } = useAuth();
 
   return (
     <section className="text-base-content">
       <div className="container mx-auto mt-10 px-4">
         <p className="mb-6 text-center text-base sm:text-lg">
-          {t('infoProfile.msg')} 
+          {t('infoProfile.msg')}
+          <a className="text-blue-500 font-bold" href="/profile"> {user?.username ?? 'Usuário'} </a>
         </p>
 
         <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
@@ -72,7 +75,7 @@ const InfoComponent: React.FC = () => {
               </div>
               <div className="text-sm font-bold sm:text-lg">0</div>
             </div>
-            
+
             <div className="col-span-full flex justify-center text-sm sm:text-base">
               <p>{t('infoProfile.profile')}</p>
             </div>

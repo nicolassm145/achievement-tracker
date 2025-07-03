@@ -11,18 +11,11 @@ import PrivacyPage from '../pages/Privacy';
 import ComingSoonPage from '../pages/ComingSoon';
 import AnticipatedPage from '../pages/Anticipated';
 import GamePage from '../pages/Games';
-
+import { ProtectedRoute } from '../components/ProtectedRouteComponent';
+import SearchPage from '../pages/Search';
+import SettingsPage from '../pages/Settings';
 
 const router = createBrowserRouter([
-  {
-    path: '/',
-    element: (
-      <>
-        <HomePage />
-        <TitleComponent title="Nexus" />
-      </>
-    ),
-  },
   {
     path: '/register',
     element: (
@@ -42,7 +35,103 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "*",
+    element: <ProtectedRoute />,
+    children: [
+      {
+        path: '/',
+        element: (
+          <>
+            <HomePage />
+            <TitleComponent title="Nexus" />
+          </>
+        ),
+      },
+      {
+        path: '/profile',
+        element: (
+          <>
+            <ProfilePage />
+            <TitleComponent title="Profile" />
+          </>
+        ),
+      },
+      {
+        path: '/terms',
+        element: (
+          <>
+            <TermsPage />
+            <TitleComponent title="Terms" />
+          </>
+        ),
+      },
+      {
+        path: '/about',
+        element: (
+          <>
+            <AboutPage />
+            <TitleComponent title="About" />
+          </>
+        ),
+      },
+      {
+        path: '/privacy',
+        element: (
+          <>
+            <PrivacyPage />
+            <TitleComponent title="Privacy" />
+          </>
+        ),
+      },
+      {
+        path: '/coming-soon',
+        element: (
+          <>
+            <ComingSoonPage />
+            <TitleComponent title="Coming Soon" />
+          </>
+        ),
+      },
+      {
+        path: '/search',
+        element: (
+          <>
+            <SearchPage />
+            <TitleComponent title="Search" />
+          </>
+        ),
+      },
+      {
+        path: '/settings',
+        element: (
+          <>
+          <SettingsPage />
+          <TitleComponent title="Settings" />
+          </>
+        ),
+      },
+      {
+        path: '/anticipated',
+        element: (
+          <>
+            <AnticipatedPage />
+            <TitleComponent title="Anticipaded" />
+          </>
+        ),
+      },
+      {
+        path: '/games/:gameId',
+        element: (
+          <>
+            <GamePage />
+            <TitleComponent title="Game Details" />
+          </>
+        ),
+      },
+    ],
+  },
+
+  {
+    path: '*',
     element: (
       <>
         <NotFound />
@@ -50,69 +139,6 @@ const router = createBrowserRouter([
       </>
     ),
   },
-  {
-    path: '/profile',
-    element: (
-      <>
-        <ProfilePage />
-        <TitleComponent title="Profile" />
-      </>
-    ),
-  },
-  {
-    path: '/terms',
-    element: (
-      <>
-          <TermsPage />
-          <TitleComponent title="Terms" />
-      </>
-    ),
-  },
-  {
-    path: '/about',
-    element: (
-      <>
-          <AboutPage />
-          <TitleComponent title="About" />
-      </>
-    ),
-  },
-  {
-    path: '/privacy',
-    element: (
-      <>
-          <PrivacyPage />
-          <TitleComponent title="Privacy" />
-      </>
-    ),
-  },
-  {
-    path: '/coming-soon',
-    element: (
-      <>
-        <ComingSoonPage />
-        <TitleComponent title="Coming Soon" />
-      </>
-    ),
-  },
-  {
-    path: '/anticipated',
-    element: (
-      <>
-        <AnticipatedPage />
-        <TitleComponent title="Anticipaded" />
-      </>
-    ),
-  },
-  { 
-    path: '/games/:gameId',
-    element: (
-      <>
-        <GamePage />
-        <TitleComponent title="Game Details" />
-      </>
-    ),
-  }
 ]);
 
 export default router;
