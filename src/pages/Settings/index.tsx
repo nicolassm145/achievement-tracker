@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import SystemLayout from '../../components/Layout/SystemLayout';
 import avatar from '../../assets/avatar.png';
 import { useAuth } from '../../contexts/AuthContext';
+import { AdjustmentsHorizontalIcon } from '@heroicons/react/24/outline';
 
 const SettingsPage: React.FC = () => {
   const { user, loading } = useAuth();
@@ -17,7 +18,7 @@ const SettingsPage: React.FC = () => {
   if (loading) {
     return (
       <SystemLayout>
-        <div className="flex items-center justify-center h-64">
+        <div className="flex h-64 items-center justify-center">
           Carregando perfil...
         </div>
       </SystemLayout>
@@ -26,19 +27,17 @@ const SettingsPage: React.FC = () => {
 
   return (
     <SystemLayout>
-      {/* Banner */}
       <div className="relative -mt-20 h-54 w-full sm:h-64 md:h-96 lg:h-128">
         <img
           src="/profileBG.png"
           alt="Banner"
           className="h-full w-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black-100/80 to-base-100" />
+        <div className="via-black-100/80 to-base-100 absolute inset-0 bg-gradient-to-b from-transparent" />
       </div>
 
-      {/* Card */}
-      <div className="relative mx-auto -mt-8 px-4 sm:px-8 md:px-16 lg:px-36">
-        <div className="profile-card rounded-lg shadow-xl bg-base-100 p-6">
+      <div className="relative mx-auto -mt-8 px-4 sm:-mt-32 sm:px-8 md:-mt-36 lg:-mt-40 lg:px-36">
+        <div className="profile-card bg-base-100 rounded-lg p-6 shadow-xl">
           <div className="flex flex-col items-center space-y-4 sm:flex-row sm:space-y-0 sm:space-x-6 md:items-start">
             <img
               alt="Avatar do usuário"
@@ -46,18 +45,22 @@ const SettingsPage: React.FC = () => {
               className="border-base-100 -mt-20 h-32 w-32 rounded border-4 shadow-md"
             />
 
-            <div>
+            <div className="flex-1">
               <h1 className="-ml-1 text-xl font-bold sm:-mt-16 sm:text-2xl md:text-3xl lg:-mt-15">
                 {user?.username ?? 'Usuário'}
               </h1>
             </div>
+            <div>
+              <a href="/profile">
+                <AdjustmentsHorizontalIcon className="ml-auto w-10 cursor-pointer" />
+              </a>
+            </div>
           </div>
 
           {/* Título */}
-          <h2 className="mt-8 text-2xl font-semibold text-center">Settings</h2>
+          <h2 className="mt-8 text-center text-2xl font-semibold">Settings</h2>
           <div className="divider my-4" />
 
-          {/* Formulário centralizado e responsivo */}
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -65,7 +68,6 @@ const SettingsPage: React.FC = () => {
             }}
             className="flex flex-col items-center space-y-6"
           >
-            {/* Steam UID */}
             <div className="form-control w-full sm:w-3/4 md:w-1/2 lg:w-1/3">
               <label className="label">
                 <span className="label-text">Steam</span>
@@ -79,7 +81,6 @@ const SettingsPage: React.FC = () => {
               />
             </div>
 
-            {/* Xbox ID */}
             <div className="form-control w-full sm:w-3/4 md:w-1/2 lg:w-1/3">
               <label className="label">
                 <span className="label-text">Xbox</span>
@@ -93,7 +94,6 @@ const SettingsPage: React.FC = () => {
               />
             </div>
 
-            {/* PSN ID */}
             <div className="form-control w-full sm:w-3/4 md:w-1/2 lg:w-1/3">
               <label className="label">
                 <span className="label-text">Playstation</span>
@@ -107,8 +107,7 @@ const SettingsPage: React.FC = () => {
               />
             </div>
 
-            {/* Botão */}
-            <div className="w-full sm:w-3/4 md:w-1/2 lg:w-1/3 flex justify-end">
+            <div className="flex w-full justify-end sm:w-3/4 md:w-1/2 lg:w-1/3">
               <button type="submit" className="btn btn-primary">
                 Salvar alterações
               </button>

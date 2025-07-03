@@ -2,7 +2,6 @@ import { useTranslation } from 'react-i18next';
 import { useAuth } from '../contexts/AuthContext';
 import avatar from '../assets/avatar.png';
 import ThemeComponent from './ThemeComponent';
-import { TrophyIcon } from '@heroicons/react/24/outline';
 import { useNavigate } from 'react-router-dom';
 import SearchComponent from './SearchComponent';
 

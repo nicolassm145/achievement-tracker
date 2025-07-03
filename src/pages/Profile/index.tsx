@@ -1,6 +1,7 @@
 import SystemLayout from '../../components/Layout/SystemLayout';
 import avatar from '../../assets/avatar.png';
 import { useAuth } from '../../contexts/AuthContext';
+import { AdjustmentsHorizontalIcon } from '@heroicons/react/24/outline';
 
 const ProfilePage: React.FC = () => {
   const { user, loading } = useAuth();
@@ -35,14 +36,22 @@ const ProfilePage: React.FC = () => {
               className="border-base-100 -mt-20 h-32 w-32 rounded border-4 shadow-md"
             />
 
-            <div>
+            <div className="flex-1">
               <h1 className="-ml-1 text-xl font-bold sm:-mt-16 sm:text-2xl md:text-3xl lg:-mt-15">
                 {user?.username ?? 'Usuário'}
               </h1>
             </div>
+            <div>
+              <a href="/settings">
+                <AdjustmentsHorizontalIcon className="ml-auto w-10 cursor-pointer" />
+              </a>
+            </div>
           </div>
 
-          <div className="mt-6"></div>
+          <div className="mt-6 flex space-x-4">
+            <div className="bg-base-200 basis-[65%] rounded p-4"></div>
+            <div className="bg-base-300 basis-[35%] rounded p-4"></div>
+          </div>
         </div>
       </div>
     </SystemLayout>
