@@ -25,18 +25,20 @@ const SettingsPage: React.FC = () => {
   }
 
   return (
-   <SystemLayout>
+    <SystemLayout>
+      {/* Banner */}
       <div className="relative -mt-20 h-54 w-full sm:h-64 md:h-96 lg:h-128">
         <img
           src="/profileBG.png"
           alt="Banner"
           className="h-full w-full object-cover"
         />
-        <div className="via-black-100/80 to-base-100 absolute inset-0 bg-gradient-to-b from-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black-100/80 to-base-100" />
       </div>
 
-      <div className="relative mx-auto -mt-8 px-4 sm:-mt-32 sm:px-8 md:-mt-36 lg:-mt-40 lg:px-36">
-        <div className="profile-card rounded-lg shadow-xl md:p-6">
+      {/* Card */}
+      <div className="relative mx-auto -mt-8 px-4 sm:px-8 md:px-16 lg:px-36">
+        <div className="profile-card rounded-lg shadow-xl bg-base-100 p-6">
           <div className="flex flex-col items-center space-y-4 sm:flex-row sm:space-y-0 sm:space-x-6 md:items-start">
             <img
               alt="Avatar do usuário"
@@ -51,22 +53,22 @@ const SettingsPage: React.FC = () => {
             </div>
           </div>
 
-          {/* Título da seção Settings */}
-          <h2 className="mt-8 text-xl font-semibold">Settings</h2>
+          {/* Título */}
+          <h2 className="mt-8 text-2xl font-semibold text-center">Settings</h2>
           <div className="divider my-4" />
 
-          {/* Formulário de IDs */}
+          {/* Formulário centralizado e responsivo */}
           <form
             onSubmit={(e) => {
               e.preventDefault();
               handleSave();
             }}
-            className="space-y-6"
+            className="flex flex-col items-center space-y-6"
           >
             {/* Steam UID */}
-            <div className="form-control w-full max-w-md">
+            <div className="form-control w-full sm:w-3/4 md:w-1/2 lg:w-1/3">
               <label className="label">
-                <span className="label-text">Steam UID</span>
+                <span className="label-text">Steam</span>
               </label>
               <input
                 type="text"
@@ -78,9 +80,9 @@ const SettingsPage: React.FC = () => {
             </div>
 
             {/* Xbox ID */}
-            <div className="form-control w-full max-w-md">
+            <div className="form-control w-full sm:w-3/4 md:w-1/2 lg:w-1/3">
               <label className="label">
-                <span className="label-text">Xbox ID</span>
+                <span className="label-text">Xbox</span>
               </label>
               <input
                 type="text"
@@ -92,9 +94,9 @@ const SettingsPage: React.FC = () => {
             </div>
 
             {/* PSN ID */}
-            <div className="form-control w-full max-w-md">
+            <div className="form-control w-full sm:w-3/4 md:w-1/2 lg:w-1/3">
               <label className="label">
-                <span className="label-text">PSN ID</span>
+                <span className="label-text">Playstation</span>
               </label>
               <input
                 type="text"
@@ -105,8 +107,8 @@ const SettingsPage: React.FC = () => {
               />
             </div>
 
-            {/* Botão de salvar */}
-            <div>
+            {/* Botão */}
+            <div className="w-full sm:w-3/4 md:w-1/2 lg:w-1/3 flex justify-end">
               <button type="submit" className="btn btn-primary">
                 Salvar alterações
               </button>
