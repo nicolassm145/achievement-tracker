@@ -110,7 +110,7 @@ const SteamComponent: React.FC = () => {
         <div>Você não possui jogos Steam ou conquistas cadastradas.</div>
       ) : (
         <>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="space-y-6 p-4">
             {cards.slice(0, visibleCount).map((card, idx) => (
               <GameCard key={`${card.title}-${idx}`} {...card} />
             ))}
