@@ -2,8 +2,21 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://localhost:8000', // URL do seu backend
-  timeout: 10000, // timeout de 10 segundos
+  baseURL: 'http://localhost:8000', 
+   headers: {
+    'Content-Type': 'application/json',
+  },
+});
+
+api.interceptors.request.use(config => {
+  const token = localStorage.getItem('access_token');
+  if (token) {
+    if (!config.headers) {
+      config.headers = {};
+    }
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
 });
 
 // Interceptor para tratar erros globalmente

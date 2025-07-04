@@ -2,9 +2,15 @@ import SystemLayout from '../../components/Layout/SystemLayout';
 import avatar from '../../assets/avatar.png';
 import { useAuth } from '../../contexts/AuthContext';
 import { AdjustmentsHorizontalIcon } from '@heroicons/react/24/outline';
+import SteamComponent from '../../components/Achievements/SteamComponent';
+import XboxComponent from '../../components/Achievements/XboxComponent';
+import PsnComponent from '../../components/Achievements/PsnComponent';
+
+import React, { useState } from 'react';
 
 const ProfilePage: React.FC = () => {
   const { user, loading } = useAuth();
+  const [activeTab, setActiveTab] = useState('overview');
 
   if (loading) {
     return (
@@ -48,9 +54,39 @@ const ProfilePage: React.FC = () => {
             </div>
           </div>
 
-          <div className="mt-6 flex space-x-4">
-            <div className="bg-base-200 basis-[65%] rounded p-4"></div>
-            <div className="bg-base-300 basis-[35%] rounded p-4"></div>
+          <div className="mt-6 flex ">
+            <div className="rounded md:basis-[80%] ">
+              <div role="tablist" className="tabs tabs-lift">
+                <button
+                  role="tab"
+                  onClick={() => setActiveTab('Steam')}
+                  className={`tab ${activeTab === 'Steam' ? 'tab-active' : ''} `}
+                >
+                  Steam
+                </button>
+                <button
+                  role="tab"
+                  onClick={() => setActiveTab('Xbox')}
+                  className={`tab ${activeTab === 'Xbox' ? 'tab-active bg-green-500' : ''}`}
+                >
+                  Xbox
+                </button>
+                <button
+                  role="tab"
+                  onClick={() => setActiveTab('Playstation')}
+                  className={`tab ${activeTab === 'Playstation' ? 'tab-active' : ''}`}
+                >
+                  Playstation
+                </button>
+              </div>
+
+              <div className=" rounded ">
+                {activeTab === 'Steam' && <SteamComponent />}
+                {activeTab === 'Xbox' && <XboxComponent />}
+                {activeTab === 'Playstation' && <PsnComponent />}
+              </div>
+            </div>
+            <div className="bg-base-300 hidden basis-[30%] rounded p-4 md:block"></div>
           </div>
         </div>
       </div>

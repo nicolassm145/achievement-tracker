@@ -1,17 +1,22 @@
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-  type SetStateAction,
-} from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import api from '../services/api';
 
-// Define the User type or import it from your models/types file
+// Raw API response
+interface UserRaw {
+  id: number;
+  username: string;
+  steam_id?: string;
+  xbox_id?: string;
+  psn_id?: string;
+}
+
+// Normalized user type
 export interface User {
   id: number;
   username: string;
-  // Add other user properties as needed
+  steamid?: string;
+  xboxId?: string;
+  psnId?: string;
 }
 
 interface AuthContextType {
@@ -25,29 +30,32 @@ const AuthContext = createContext<AuthContextType>({
   user: null,
   loading: true,
   logout: () => {},
-  setUser: function (value: SetStateAction<User | null>): void {
-    throw new Error('Function not implemented.');
-  },
+  setUser: () => {},
 });
 
-export const AuthProvider: React.FC<React.PropsWithChildren<{}>> = ({
-  children,
-}) => {
+export const AuthProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const init = async () => {
+    (async () => {
       try {
-        const resp = await api.get<User>('/user/me');
-        setUser(resp.data);
+        const resp = await api.get<UserRaw>('/user/me');
+        const raw = resp.data;
+        const normalized: User = {
+          id: raw.id,
+          username: raw.username,
+          steamid: raw.steam_id,
+          xboxId: raw.xbox_id,
+          psnId: raw.psn_id,
+        };
+        setUser(normalized);
       } catch {
         setUser(null);
       } finally {
         setLoading(false);
       }
-    };
-    init();
+    })();
   }, []);
 
   const logout = () => {
@@ -56,12 +64,7 @@ export const AuthProvider: React.FC<React.PropsWithChildren<{}>> = ({
     setUser(null);
   };
 
-
-  return (
-    <AuthContext.Provider value={{ user, setUser, loading, logout }}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={{ user, setUser, loading, logout }}>{children}</AuthContext.Provider>;
 };
 
 export const useAuth = () => useContext(AuthContext);
