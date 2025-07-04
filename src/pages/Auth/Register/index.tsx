@@ -35,7 +35,7 @@ const RegisterPage = () => {
     }
 
     try {
-      await axios.post('http://localhost:8000/user/register', {
+      await axios.post('https://tracker-api-bh00.onrender.com/user/register', {
         username: formData.username,
         email: formData.email,
         password: formData.password
