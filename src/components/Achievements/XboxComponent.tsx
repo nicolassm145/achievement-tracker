@@ -3,7 +3,6 @@ import { useAuth } from '../../contexts/AuthContext';
 import { useXboxAllAchievements } from '../../hooks/useXboxFullAchievements';
 
 const INITIAL_VISIBLE = 12;
-const INCREMENT = 12;
 
 const XboxComponent: React.FC = () => {
   const { user, loading } = useAuth();
