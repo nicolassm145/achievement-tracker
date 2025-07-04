@@ -45,7 +45,7 @@ const LoginPage: React.FC = () => {
       const meResp = await api.get<User>('/user/me');
       setUser(meResp.data);
       // 3) aí sim navega pro protected
-      navigate('/profile');
+      navigate('/settings');
     } catch (err: any) {
       if (err.response?.data?.detail) {
         setMessage(`Erro: ${err.response.data.detail}`);

@@ -7,6 +7,7 @@ import XboxComponent from '../../components/Achievements/XboxComponent';
 import PsnComponent from '../../components/Achievements/PsnComponent';
 
 import React, { useState } from 'react';
+import RareAchievementsComponent from '../../components/Achievements/RareAchievementsComponent';
 
 const ProfilePage: React.FC = () => {
   const { user, loading } = useAuth();
@@ -86,7 +87,9 @@ const ProfilePage: React.FC = () => {
                 {activeTab === 'Playstation' && <PsnComponent />}
               </div>
             </div>
-            <div className="bg-base-300 hidden basis-[30%] rounded p-4 md:block"></div>
+            <div className=" hidden basis-[30%] rounded p-4 md:block">
+              <RareAchievementsComponent />
+            </div>
           </div>
         </div>
       </div>
