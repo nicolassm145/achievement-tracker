@@ -40,7 +40,7 @@ const XboxComponent: React.FC = () => {
 
   return (
     <div className="space-y-6 p-4">
-      <h2 className="text-lg font-bold mb-2">Jogos e conquistas</h2>
+
       <div className="space-y-6 p-4">
         {games.map((t: any) => (
           <div key={t.titleId} className="border rounded p-4 mb-4">
@@ -52,15 +52,14 @@ const XboxComponent: React.FC = () => {
               </div>
             </div>
             <div>
-              <strong>Conquistas:</strong>
-              <ul className="list-disc ml-6">
+              <strong className=''>Conquistas:</strong>
+              <ul className="flex flex-wrap gap-3 p-0 m-0 mt-2 li">
                 {t.achievements && t.achievements.length > 0 ? (
                   t.achievements.map((ach: any) => (
                     <li key={ach.id} className="flex items-center gap-2">
                       {ach.mediaAssets && ach.mediaAssets.length > 0 && (
-                        <img src={ach.mediaAssets[0].url} alt={ach.name} width={24} height={24} className="inline-block mr-2" />
-                      )}
-                      {ach.name} {ach.progressState === 'Achieved' && <span className="text-green-600">✔</span>}
+                        <img src={ach.mediaAssets[0].url} alt={ach.name} width={24} height={24} className="flex outline h-8 w-8" />
+                      )}{ach.progressState === 'Achieved'}
                     </li>
                   ))
                 ) : (

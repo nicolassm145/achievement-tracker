@@ -79,3 +79,4 @@ export default function XboxGameCard({ xboxId, title }: XboxGameCardProps) {
     </div>
   );
 }
+
