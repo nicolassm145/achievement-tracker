@@ -57,4 +57,15 @@ if (token) {
   api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 }
 
+export const getXboxGamesWithFullAchievements = async (xuid: string, page = 1, limit = 5) => {
+  const response = await api.get(`/xbox/profile/games-with-full-achievements/${xuid}?page=${page}&limit=${limit}`);
+  return response.data;
+};
+
+export const getXboxAllAchievements = async (xuid: string, page = 1, limit = 5) => {
+  const response = await api.get(`/xbox/profile/achievements/all/${xuid}?page=${page}&limit=${limit}`);
+  return response.data;
+};
+
 export default api;
+
