@@ -1,6 +1,7 @@
 // src/components/Achievements/RareAchievementsComponent.tsx
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
+import { useTranslation } from 'react-i18next';
 import api from '../../services/api';
 
 interface RareAchievement {
@@ -31,6 +32,7 @@ interface RareResponse {
 const STORAGE_KEY = 'steam_rare_achievements_cache';
 
 const RareAchievementsComponent: React.FC = () => {
+  const { t } = useTranslation();
   const { user, loading } = useAuth();
   const [data, setData] = useState<RareResponse | null>(() => {
     const cached = sessionStorage.getItem(STORAGE_KEY);
@@ -52,18 +54,18 @@ const RareAchievementsComponent: React.FC = () => {
       })
       .catch((err) => {
         console.error(err);
-        setError('Não foi possível carregar conquistas raras.');
+        setError(t('rare.error_load'));
       });
-  }, [loading, user?.steamid, data]);
+  }, [loading, user?.steamid, data, t]);
 
-  if (loading) return <div>Carregando conquistas raras...</div>;
-  if (!user?.steamid) return <div>SteamID não vinculado.</div>;
+  if (loading) return <div>{t('rare.loading')}</div>;
+  if (!user?.steamid) return <div>{t('rare.no_steamid')}</div>;
   if (error) return <div className="text-red-500">{error}</div>;
   if (!data || data.games.length === 0)
     return (
       <div className="bg-base-100 rounded p-4">
-        <h2 className="mb-4 text-2xl font-bold">Conquistas Raras</h2>
-        <p>Você não possui conquistas raras (&lt;10%).</p>
+        <h2 className="mb-4 text-2xl font-bold">{t('rare.title')}</h2>
+        <p>{t('rare.no_rares', { threshold: data?.rarity_threshold })}</p>
       </div>
     );
 
@@ -71,12 +73,14 @@ const RareAchievementsComponent: React.FC = () => {
 
   return (
     <div className="bg-base-100 space-y-4 rounded p-4">
-      <h2 className="text-2xl font-bold">Conquistas Raras</h2>
+      <h2 className="text-2xl font-bold">{t('rare.title')}</h2>
 
       <p className="text-sm">
-        Jogos com conquistas raras: {data.total_games_with_rare}
+        {t('rare.summary', {
+          games: data.total_games_with_rare,
+        })}
         <br />
-        Total de conquistas: {data.total_rare_achievements}
+        {t('rare.summary2', { achievements: data.total_rare_achievements })}
       </p>
       <div className="border-t" />
       <div className="space-y-6">
@@ -87,18 +91,18 @@ const RareAchievementsComponent: React.FC = () => {
           >
             <div className="bg-base-200 flex items-center justify-between p-3">
               <span className="font-semibold">{game.game_name}</span>
-              <span className="text-sm font-bold">{game.total_rare}</span>
+              <span className="text-sm font-bold">
+                {t('rare.total_for_game', { count: game.total_rare })}
+              </span>
             </div>
 
-            <div className="p-3 space-y-2">
+            <div className="space-y-2 p-3">
               {game.rare_achievements.map((ach, idx) => {
                 const perc =
                   typeof ach.global_percentage === 'number'
                     ? ach.global_percentage
                     : parseFloat(String(ach.global_percentage));
-                const displayPerc = isNaN(perc)
-                  ? '-'
-                  : perc.toFixed(1) + '%';
+                const displayPerc = isNaN(perc) ? '-' : perc.toFixed(1) + '%';
 
                 return (
                   <div
@@ -111,9 +115,7 @@ const RareAchievementsComponent: React.FC = () => {
                         alt={ach.name}
                         className="h-6 w-6 rounded"
                       />
-                      <span className="text-xs font-medium">
-                        {ach.name}
-                      </span>
+                      <span className="text-xs font-medium">{ach.name}</span>
                     </div>
                     <span className="text-[10px]">{displayPerc}</span>
                   </div>
@@ -129,7 +131,7 @@ const RareAchievementsComponent: React.FC = () => {
               className="btn btn-sm btn-primary"
               onClick={() => setVisibleGames((v) => v + 5)}
             >
-              Mostrar mais jogos raros (+5)
+              {t('rare.load_more')}
             </button>
           </div>
         )}

@@ -16,6 +16,18 @@
     "loading": "Carregando...",
     "preferences": "Preferências"
   },
+ "rare": {
+    "title": "Conquistas Raras",
+    "loading": "Carregando conquistas raras...",
+    "no_steamid": "SteamID não vinculado.",
+    "error_load": "Não foi possível carregar conquistas raras.",
+    "no_rares": "Carregando conquistas raras...",
+    "summary": "Jogos com conquistas raras: {{games}}",
+    "summary2": "Conquistas raras: {{achievements}}",
+    "total_for_game": "{{count}}",
+    "total_for_game_plural": "{{count}}",
+    "load_more": "Mostrar mais (+5)"
+  },
   "search": {
     "title": "Resultados da pesquisa para:",
     "description": "Navegue pelos jogos que correspondem à sua consulta.",

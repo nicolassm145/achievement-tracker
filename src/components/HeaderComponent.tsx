@@ -41,7 +41,6 @@ const HeaderComponent: React.FC = () => {
           </div>
           <ul className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-48 p-2 shadow-lg sm:w-52">
             <li><a href="/profile" className="text-sm">{t('header.profile')}</a></li>
-            <li><a href="/games" className="flex items-center gap-2 text-sm">{t('header.games')}</a></li>
             <li><a href="/settings" className="flex items-center gap-2 text-sm">{t('header.settings')}</a></li>
             <li>
               <details>

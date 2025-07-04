@@ -1,14 +1,14 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import api from '../services/api';
 
 // Raw API response
-interface UserRaw {
+type UserRaw = {
   id: number;
   username: string;
   steam_id?: string;
   xbox_id?: string;
   psn_id?: string;
-}
+};
 
 // Normalized user type
 export interface User {
@@ -21,24 +21,45 @@ export interface User {
 
 interface AuthContextType {
   user: User | null;
+  token: string | null;
   setUser: React.Dispatch<React.SetStateAction<User | null>>;
+  setToken: React.Dispatch<React.SetStateAction<string | null>>;
   loading: boolean;
   logout: () => void;
 }
 
 const AuthContext = createContext<AuthContextType>({
   user: null,
+  token: null,
+  setUser: () => {},
+  setToken: () => {},
   loading: true,
   logout: () => {},
-  setUser: () => {},
 });
 
 export const AuthProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
+  const [token, setToken] = useState<string | null>(() => localStorage.getItem('access_token'));
   const [loading, setLoading] = useState(true);
+
+  // Whenever token changes, update axios header
+  useEffect(() => {
+    if (token) {
+      api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      localStorage.setItem('access_token', token);
+    } else {
+      delete api.defaults.headers.common['Authorization'];
+      localStorage.removeItem('access_token');
+    }
+  }, [token]);
 
   useEffect(() => {
     (async () => {
+      if (!token) {
+        setLoading(false);
+        return;
+      }
+
       try {
         const resp = await api.get<UserRaw>('/user/me');
         const raw = resp.data;
@@ -56,19 +77,22 @@ export const AuthProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }
         setLoading(false);
       }
     })();
-  }, []);
+  }, [token]);
 
   const logout = () => {
-    localStorage.removeItem('access_token');
-    delete api.defaults.headers.common['Authorization'];
+    setToken(null);
+    setUser(null);
     sessionStorage.removeItem('steam_cards_cache');
     sessionStorage.removeItem('xbox_cards_cache');
     sessionStorage.removeItem('psn_cards_cache');
     sessionStorage.removeItem('steam_rare_achievements_cache');
-    setUser(null);
   };
 
-  return <AuthContext.Provider value={{ user, setUser, loading, logout }}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={{ user, token, setUser, setToken, loading, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
 export const useAuth = () => useContext(AuthContext);

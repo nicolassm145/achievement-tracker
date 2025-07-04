@@ -29,7 +29,6 @@ const STORAGE_KEY = 'steam_cards_cache';
 const SteamComponent: React.FC = () => {
   const { user, loading } = useAuth();
   const [cards, setCards] = useState<GameCardProps[]>(() => {
-    // tenta recuperar do cache
     const cached = sessionStorage.getItem(STORAGE_KEY);
     return cached ? JSON.parse(cached) : [];
   });
@@ -38,7 +37,7 @@ const SteamComponent: React.FC = () => {
 
   useEffect(() => {
     if (loading || !user?.steamid) return;
-    // Se já existe cache, não refaz a chamada
+    // se já cached, não busca
     if (cards.length > 0) return;
 
     const steamid = String(user.steamid);
@@ -47,61 +46,53 @@ const SteamComponent: React.FC = () => {
       api.get<AchievementGame[]>(`/steam/profile/achievements/${steamid}`),
     ])
       .then(([gamesRes, achRes]) => {
-        const ownedGames = gamesRes.data.games || [];
+        const owned = gamesRes.data.games || [];
         const achGames = achRes.data;
         const achMap = new Map<number, AchievementGame>();
-        achGames.forEach((ag) => achMap.set(ag.appid, ag));
+        achGames.forEach(ag => achMap.set(ag.appid, ag));
 
-        // Monta array de cards, já filtrando só quem tem conquistas e ordenando pelo último unlock
-        const withTs = ownedGames.map(g => {
+        const withTs = owned.map(g => {
           const ag = achMap.get(g.appid);
           const unlocks = ag?.achievements.map(a => a.unlocktime) || [];
-          const lastTsSec = unlocks.length ? Math.max(...unlocks) : 0;
-          const lastTsMs = lastTsSec * 1000;
+          const lastSec = unlocks.length ? Math.max(...unlocks) : 0;
+          const lastMs = lastSec * 1000;
 
-          // Se não tem conquistas, vamos ignorar depois
           const bannerUrl = `https://cdn.akamai.steamstatic.com/steam/apps/${g.appid}/header.jpg`;
           const timePlayed = `${Math.floor(g.playtime_forever / 60)}h ${g.playtime_forever % 60}m`;
           const completion = ag
             ? Math.round((ag.achieved_achievements / ag.total_achievements) * 100)
             : 0;
           const trophyIcons = ag
-            ? ag.achievements.filter(a => a.achieved === 1)
-                .map(a => a.icon || a.icongray || '')
+            ? ag.achievements.filter(a => a.achieved === 1).map(a => a.icon || a.icongray || '')
             : [];
-          const lastPlayed = lastTsSec
-            ? new Date(lastTsMs).toLocaleDateString('pt-BR')
-            : '-';
+          const lastPlayed = lastSec ? new Date(lastMs).toLocaleDateString('pt-BR') : '-';
 
-          const card: GameCardProps = {
-            bannerUrl,
-            title: g.name,
-            timePlayed,
-            completion,
-            lastPlayed,
-            trophyIcons,
-          };
-
-          return { card, lastTsMs };
+          return { card: { bannerUrl, title: g.name, timePlayed, completion, lastPlayed, trophyIcons } as GameCardProps, lastMs };
         });
 
-        // Filtra só quem teve conquistas (lastTsMs>0), ordena do mais recente e extrai o card
         const filtered = withTs
-          .filter(x => x.lastTsMs > 0)
-          .sort((a, b) => b.lastTsMs - a.lastTsMs)
+          .filter(x => x.lastMs > 0)
+          .sort((a, b) => b.lastMs - a.lastMs)
           .map(x => x.card);
 
         setCards(filtered);
         sessionStorage.setItem(STORAGE_KEY, JSON.stringify(filtered));
       })
-      .catch((err) => {
+      .catch(err => {
         console.error(err);
-        setError('Não foi possível carregar seus jogos Steam.');
+        const status = err.response?.status;
+        if (status === 404) {
+          // perfil existente mas sem jogos/conquistas
+          setError(null);
+          setCards([]);
+        } else {
+          setError('Não foi possível carregar seus jogos Steam.');
+        }
       });
-  }, [loading, user?.steamid, cards.length]);
+  }, [loading, user?.steamid]);
 
   if (loading) return <div>Carregando perfil...</div>;
-  if (!user?.steamid)
+  if (!user?.steamid) {
     return (
       <div>
         Você ainda não vinculou seu SteamID em configurações.
@@ -109,19 +100,19 @@ const SteamComponent: React.FC = () => {
         Valor atual de user.steamid: <code>{JSON.stringify(user?.steamid)}</code>
       </div>
     );
-  if (error) return <div className="text-red-500">{error}</div>;
-
-  const visible = cards.slice(0, visibleCount);
+  }
 
   return (
     <div className="space-y-6 p-4">
-      {cards.length === 0 ? (
-        <div>Carregando...</div>
+      {error ? (
+        <div className="text-red-500">{error}</div>
+      ) : cards.length === 0 ? (
+        <div>Você não possui jogos Steam ou conquistas cadastradas.</div>
       ) : (
         <>
-          <div className="space-y-6 p-4">
-            {visible.map((card) => (
-              <GameCard key={`${card.title}-${card.bannerUrl}`} {...card} />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {cards.slice(0, visibleCount).map((card, idx) => (
+              <GameCard key={`${card.title}-${idx}`} {...card} />
             ))}
           </div>
           {visibleCount < cards.length && (

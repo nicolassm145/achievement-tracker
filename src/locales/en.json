@@ -17,6 +17,18 @@
     "loading": "Loading...",
     "preferences": "Preferences"
   },
+  "rare": {
+    "title": "Rare Achievements",
+    "loading": "Loading rare achievements...",
+    "no_steamid": "SteamID not linked.",
+    "error_load": "Could not load rare achievements.",
+    "no_rares": "Loading rare achievements...",
+    "summary": "Games with rare achievements: {{games}}",
+    "summary2": "Total rare achievements: {{achievements}}",
+    "total_for_game": "{{count}}",
+    "total_for_game_plural": "{{count}}",
+    "load_more": "Mostrar mais (+5)"
+  },
   "search": {
     "title": "Search results for:",
     "description": "Browse games matching your query.",
