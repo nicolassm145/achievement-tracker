@@ -61,6 +61,9 @@ export const AuthProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }
   const logout = () => {
     localStorage.removeItem('access_token');
     delete api.defaults.headers.common['Authorization'];
+    sessionStorage.removeItem('steam_cards_cache');
+    sessionStorage.removeItem('xbox_cards_cache');
+    sessionStorage.removeItem('psn_cards_cache');
     setUser(null);
   };
 
