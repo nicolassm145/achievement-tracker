@@ -19,7 +19,7 @@ const TrendingGamesComponent: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch('http://localhost:8000/igdb/trending')
+    fetch('https://tracker-api-bh00.onrender.com/igdb/trending')
       .then(async (res) => {
         if (!res.ok) throw new Error(`Erro ${res.status}`);
         return res.json();

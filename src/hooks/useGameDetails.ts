@@ -13,7 +13,7 @@ export function useGameDetails(gameId: number) {
       try {
         setLoading(true);
         // CORREÇÃO: Adicione /igdb no caminho
-        const res = await fetch(`http://localhost:8000/igdb/games/${gameId}`);
+        const res = await fetch(`https://tracker-api-bh00.onrender.com/igdb/games/${gameId}`);
         
         console.log(`Status: ${res.status}`); // Log para depuração
         

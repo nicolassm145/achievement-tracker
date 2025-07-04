@@ -10,7 +10,7 @@ export function useAnticipatedGames() {
     async function fetchGames() {
       try {
         setLoading(true);
-        const res = await fetch("http://localhost:8000/igdb/anticipated");
+        const res = await fetch("https://tracker-api-bh00.onrender.com/igdb/anticipated");
         if (!res.ok) throw new Error(`Status ${res.status}`);
         const data: Game[] = await res.json();
         setGames(data);
