@@ -18,6 +18,15 @@ import SettingsPage from '../pages/Settings';
 
 const router = createBrowserRouter([
   {
+    path: '/',
+    element: (
+      <>
+        <HomePage />
+        <TitleComponent title="Nexus" />
+      </>
+    ),
+  },
+  {
     path: '/register',
     element: (
       <>
@@ -38,15 +47,6 @@ const router = createBrowserRouter([
   {
     element: <ProtectedRoute />,
     children: [
-      {
-        path: '/',
-        element: (
-          <>
-            <HomePage />
-            <TitleComponent title="Nexus" />
-          </>
-        ),
-      },
       {
         path: '/profile',
         element: (
