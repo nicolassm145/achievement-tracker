@@ -14,7 +14,7 @@ import GamePage from '../pages/Games';
 import { ProtectedRoute } from '../components/ProtectedRouteComponent';
 import SearchPage from '../pages/Search';
 import SettingsPage from '../pages/Settings';
-import MyGamesPage from '../pages/MyGames';
+
 
 const router = createBrowserRouter([
   {
@@ -44,15 +44,6 @@ const router = createBrowserRouter([
           <>
             <HomePage />
             <TitleComponent title="Nexus" />
-          </>
-        ),
-      },
-      {
-        path: '/games',
-        element: (
-          <>
-            <MyGamesPage />
-            <TitleComponent title="Games" />
           </>
         ),
       },
