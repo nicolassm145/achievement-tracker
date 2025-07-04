@@ -26,13 +26,7 @@ const XboxComponent: React.FC = () => {
     }
   }, [user?.xboxId]);
 
-  const handleShowMoreAchievements = (titleId: string) => {
-    setVisibleAchievements((prev) => ({
-      ...prev,
-      [titleId]: (prev[titleId] ?? INITIAL_VISIBLE) + INCREMENT,
-    }));
-  };
-
+ 
   if (loading) return <div>Loading profile...</div>;
   if (!user?.xboxId) {
     return (
@@ -52,12 +46,12 @@ const XboxComponent: React.FC = () => {
     <div className="space-y-6 p-4">
       <div className="space-y-6">
         {games.map((game) => {
-          const shown = visibleAchievements[game.titleId] ?? INITIAL_VISIBLE;
+          const shown = visibleAchievements[game.title] ?? INITIAL_VISIBLE;
           const achs = game.achievements || [];
           const visibleList = achs.slice(0, shown);
 
           return (
-            <div key={game.titleId} className="mb-4 rounded border p-4">
+            <div key={game.title} className="mb-4 rounded border p-4">
               <div className="mb-2 flex items-center">
                 <img
                   src={game.displayImage}
