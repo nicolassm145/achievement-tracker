@@ -8,9 +8,9 @@ import api from '../../services/api';
 
 const SettingsPage: React.FC = () => {
   const { user, setUser, loading } = useAuth();
-  const [steamId, setSteamId] = useState(user?.steamid || '');
-  const [xboxId, setXboxId] = useState(user?.xboxId || '');
-  const [psnId, setPsnId] = useState(user?.psnId || '');
+  const [steamId, setSteamId] = useState('');
+  const [xboxId, setXboxId] = useState('');
+  const [psnId, setPsnId] = useState('');
   const [savingSteam, setSavingSteam] = useState(false);
   const [savingXbox, setSavingXbox] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -40,38 +40,39 @@ const SettingsPage: React.FC = () => {
   };
 
   const handleSaveXbox = async () => {
-  setError(null);
-  setMessage(null);
-  setSavingXbox(true);
+    setError(null);
+    setMessage(null);
+    setSavingXbox(true);
 
-  try {
-    // 1) Busca XUID a partir do gamertag
-    const {
-      data: { xuid },
-    } = await api.get<{ xuid: string }>(
-      `/xbox/profile/xuid/${encodeURIComponent(xboxId)}`
-    );
+    try {
+      // 1) Busca XUID a partir do gamertag
+      const {
+        data: { xuid },
+      } = await api.get<{ xuid: string }>(
+        `/xbox/profile/xuid/${encodeURIComponent(xboxId)}`
+      );
 
-    // 2) Envia o JSON { xboxid: xuid } para o back
-    const {
-      data: { xboxid },
-    } = await api.post<{ xboxid: string }>(
-      '/xbox/save-xboxid',
-      { xboxid: xuid }   // <-- corpo JSON
-    );
+      // 2) Envia o XUID diretamente como parâmetro para a rota
+      const {
+        data: { xboxid },
+      } = await api.post<{ xboxid: string }>(
+        '/xbox/save-xboxid',
+        {},
+        { params: { xboxid: xuid } }
+      );
 
-    // 3) Atualiza contexto e feedback
-    setUser((prev) => (prev ? { ...prev, xboxId: xboxid } : prev));
-    setMessage('Xbox ID vinculado com sucesso!');
-  } catch (err: any) {
-    console.error(err.response?.data || err);
-    setError(
-      err.response?.data?.detail || err.message || 'Erro ao salvar Xbox ID'
-    );
-  } finally {
-    setSavingXbox(false);
-  }
-};
+      // 3) Atualiza contexto e feedback
+      setUser((prev) => (prev ? { ...prev, xboxId: xboxid } : prev));
+      setMessage('Xbox ID vinculado com sucesso!');
+    } catch (err: any) {
+      console.error(err.response?.data || err);
+      setError(
+        err.response?.data?.detail || err.message || 'Erro ao salvar Xbox ID'
+      );
+    } finally {
+      setSavingXbox(false);
+    }
+  };
 
   if (loading) {
     return (
