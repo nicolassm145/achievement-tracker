@@ -1,11 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, type Key } from "react";
 import { getXboxAllAchievements } from "../services/api";
 
 // Estrutura de um jogo conforme retornado pela API
 export interface Game {
+  name: string | undefined;
+  displayImage: string | undefined;
+  lastTimePlayed: string | number | Date;
   id: string;
   title: string;
   achievements: {
+    id: Key | null | undefined;
+    mediaAssets: any;
     name: string;
     unlocked: boolean;
     unlockDate?: string;
