@@ -5,6 +5,7 @@ import defaultAvatar from '../../assets/avatar.png';
 import { useAuth } from '../../contexts/AuthContext';
 import { AdjustmentsHorizontalIcon } from '@heroicons/react/24/outline';
 import api from '../../services/api';
+import { useTranslation } from 'react-i18next';
 
 // importa todas as imagens de avatar com Vite
 const avatarModules = import.meta.glob(
@@ -17,7 +18,7 @@ const AVATAR_CACHE_KEY = 'selectedAvatar';
 
 const SettingsPage: React.FC = () => {
   const { user, setUser, loading } = useAuth();
-
+  const { t } = useTranslation();
   // campos de ID (Steam/Xbox/PSN)...
   const [steamId, setSteamId] = useState('');
   const [xboxId, setXboxId] = useState('');
@@ -52,7 +53,7 @@ const SettingsPage: React.FC = () => {
     if (!selectedAvatar) return;
     sessionStorage.setItem(AVATAR_CACHE_KEY, selectedAvatar);
 
-    setMessage('Avatar definido!');
+    setMessage('Avatar set!');
     setShowAvatarModal(false);
   };
 
@@ -69,10 +70,10 @@ const SettingsPage: React.FC = () => {
       );
       const { steamid } = resp.data;
       setUser((prev) => (prev ? { ...prev, steamid } : prev));
-      setMessage('SteamID vinculado com sucesso!');
+      setMessage('SteamID linked successfully!');
     } catch (err: any) {
       setError(
-        err.response?.data?.detail || err.message || 'Erro ao salvar SteamID'
+        err.response?.data?.detail || err.message || 'Error saving SteamID'
       );
     } finally {
       setSavingSteam(false);
@@ -96,10 +97,10 @@ const SettingsPage: React.FC = () => {
         { params: { xboxid: xuid } }
       );
       setUser((prev) => (prev ? { ...prev, xboxId: xboxid } : prev));
-      setMessage('Xbox ID vinculado com sucesso!');
+      setMessage('Xbox ID linked successfully!');
     } catch (err: any) {
       setError(
-        err.response?.data?.detail || err.message || 'Erro ao salvar Xbox ID'
+        err.response?.data?.detail || err.message || 'Error saving Xbox ID'
       );
     } finally {
       setSavingXbox(false);
@@ -118,10 +119,10 @@ const SettingsPage: React.FC = () => {
         { params: { psnid: psnId } }
       );
       setUser((prev) => (prev ? { ...prev, psnId: psnid } : prev));
-      setMessage('PSN ID vinculado com sucesso!');
+      setMessage('PSN ID linked successfully!');
     } catch (err: any) {
       setError(
-        err.response?.data?.detail || err.message || 'Erro ao salvar PSN ID'
+        err.response?.data?.detail || err.message || 'Error saving PSN ID"'
       );
     } finally {
       setSavingPsn(false);
@@ -132,7 +133,7 @@ const SettingsPage: React.FC = () => {
     return (
       <SystemLayout>
         <div className="flex h-64 items-center justify-center">
-          Carregando perfil...
+          Loading profile...
         </div>
       </SystemLayout>
     );
@@ -170,7 +171,7 @@ const SettingsPage: React.FC = () => {
               onClick={() => setShowAvatarModal(true)}
               className="btn btn-outline btn-sm mt-2 sm:mt-0"
             >
-              Trocar Avatar
+              {t('settings.avatar')}
             </button>
             <a href="/profile">
               <AdjustmentsHorizontalIcon className="w-10 cursor-pointer" />
@@ -178,7 +179,7 @@ const SettingsPage: React.FC = () => {
           </div>
 
           <h2 className="mt-8 text-center text-2xl font-semibold">
-            Configurações
+            {t('settings.title')}
           </h2>
           <div className="divider my-4" />
 
@@ -190,7 +191,7 @@ const SettingsPage: React.FC = () => {
             <div className="flex gap-2">
               <input
                 type="text"
-                placeholder="Digite sua vanity URL"
+                placeholder="Enter your Steam vanity URL"
                 className="input input-bordered flex-1"
                 value={steamId}
                 onChange={(e) => setSteamId(e.target.value)}
@@ -200,7 +201,7 @@ const SettingsPage: React.FC = () => {
                 onClick={handleSaveSteam}
                 disabled={savingSteam}
               >
-                {savingSteam ? 'Salvando…' : 'Salvar'}
+                {savingSteam ? 'Saving...' : 'Save'}
               </button>
             </div>
           </div>
@@ -213,7 +214,7 @@ const SettingsPage: React.FC = () => {
             <div className="flex gap-2">
               <input
                 type="text"
-                placeholder="Digite seu Xbox ID"
+                placeholder="Enter your Xbox ID"
                 className="input input-bordered flex-1"
                 value={xboxId}
                 onChange={(e) => setXboxId(e.target.value)}
@@ -223,7 +224,7 @@ const SettingsPage: React.FC = () => {
                 onClick={handleSaveXbox}
                 disabled={savingXbox}
               >
-                {savingXbox ? 'Salvando…' : 'Salvar'}
+                {savingXbox ? 'Saving...' : 'Save'}
               </button>
             </div>
           </div>
@@ -236,7 +237,7 @@ const SettingsPage: React.FC = () => {
             <div className="flex gap-2">
               <input
                 type="text"
-                placeholder="Digite seu PSN ID"
+                placeholder="Enter your PSN ID"
                 className="input input-bordered flex-1"
                 value={psnId}
                 onChange={(e) => setPsnId(e.target.value)}
@@ -246,7 +247,7 @@ const SettingsPage: React.FC = () => {
                 onClick={handleSavePsn}
                 disabled={savingPsn}
               >
-                {savingPsn ? 'Salvando…' : 'Salvar'}
+                {savingPsn ? 'Saving...' : 'Save'}
               </button>
             </div>
           </div>
@@ -261,16 +262,16 @@ const SettingsPage: React.FC = () => {
 
       {/* Modal de seleção de avatar */}
       {showAvatarModal && (
-        <div className="bg-opacity-50 fixed inset-0 z-50 flex items-center justify-center bg-black">
-          <div className="w-full max-w-lg rounded-lg bg-white p-6">
-            <h3 className="mb-4 text-lg font-semibold">Escolha seu avatar</h3>
-            <div className="grid max-h-80 grid-cols-4 gap-4 overflow-y-auto">
+        <div className="bg-opacity-50 fixed inset-0 z-50 flex items-center justify-center bg-base">
+          <div className="w-full max-w-lg rounded-lg border bg-base-200 p-6">
+            <h3 className="mb-4 text-lg font-semibold ">{t('settings.selectAvatar')}</h3>
+            <div className="grid max-h-80 grid-cols-4 gap-6 overflow-y-auto">
               {avatarImages.map((src, idx) => (
                 <img
                   key={idx}
                   src={src}
                   alt={`Avatar ${idx}`}
-                  className={`h-16 w-16 cursor-pointer rounded-full object-cover transition-transform ${
+                  className={`mt-2 ml-2 mb-2 mr-2 h-16 w-16 cursor-pointer rounded object-cover transition-transform ${
                     selectedAvatar === src ? 'ring-primary ring-4' : ''
                   }`}
                   onClick={() => setSelectedAvatar(src)}
@@ -279,14 +280,14 @@ const SettingsPage: React.FC = () => {
             </div>
             <div className="mt-6 flex justify-end gap-2">
               <button className="btn" onClick={() => setShowAvatarModal(false)}>
-                Cancelar
+                {t('settings.cancel')}
               </button>
               <button
                 className="btn btn-primary"
                 onClick={handleConfirmAvatar}
                 disabled={!selectedAvatar}
               >
-                Confirmar
+                {t('settings.saveChanges')}
               </button>
             </div>
           </div>

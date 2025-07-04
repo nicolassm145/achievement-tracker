@@ -16,7 +16,7 @@
     "loading": "Carregando...",
     "preferences": "Preferências"
   },
- "rare": {
+  "rare": {
     "title": "Conquistas Raras",
     "loading": "Carregando conquistas raras...",
     "no_steamid": "SteamID não vinculado.",
@@ -27,6 +27,14 @@
     "total_for_game": "{{count}}",
     "total_for_game_plural": "{{count}}",
     "load_more": "Mostrar mais (+5)"
+  },
+  "settings": {
+    "title": "Configurações",
+    "avatar": "Escolha seu avatar",
+    "save": "Salvar Configurações",
+    "selectAvatar": "Selecionar Avatar",
+    "saveChanges": "Salvar Alterações",
+    "cancel": "Cancelar"
   },
   "search": {
     "title": "Resultados da pesquisa para:",
@@ -118,7 +126,7 @@
     },
     "contact": "Para exercer qualquer um desses direitos, entre em contato em com nossa equipe de suporte"
   },
-   "terms": {
+  "terms": {
     "title": "Termos de Serviço",
     "intro": "Ao usar nosso site para rastrear conquistas de jogos, você concorda com estes Termos de Serviço. Leia atentamente antes de prosseguir.",
     "section1": {

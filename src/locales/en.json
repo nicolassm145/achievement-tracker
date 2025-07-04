@@ -29,6 +29,14 @@
     "total_for_game_plural": "{{count}}",
     "load_more": "Mostrar mais (+5)"
   },
+  "settings": {
+    "title": "Settings",
+    "avatar": "Choose your avatar",
+    "save": "Save Settings",
+    "selectAvatar": "Select Avatar",
+    "saveChanges": "Save Changes",
+    "cancel": "Cancel"
+  },
   "search": {
     "title": "Search results for:",
     "description": "Browse games matching your query.",
