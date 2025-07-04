@@ -2,14 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useXboxAllAchievements } from '../../hooks/useXboxFullAchievements';
 
-interface XboxTitle {
-  nome: string;
-  titleId: string;
-  ultimaVezJogado: string;
-  conquistas: number;
-  totalConquistas: number;
-  icone: string;
-}
 
 
 const XboxComponent: React.FC = () => {
