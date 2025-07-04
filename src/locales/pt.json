@@ -7,12 +7,67 @@
     "privacy": "Política"
   },
   "header": {
-    "search": "Pesquisar jogos, plataformas....",
+    "search": "Pesquisar jogos....",
     "settings": "Configurações",
     "logout": "Sair",
     "profile": "Perfil",
     "games": "Jogos",
-    "activity": "Atividade"
+    "activity": "Atividade",
+    "loading": "Carregando...",
+    "preferences": "Preferências"
+  },
+  "rare": {
+    "title": "Conquistas Raras",
+    "loading": "Carregando conquistas raras...",
+    "no_steamid": "SteamID não vinculado.",
+    "error_load": "Não foi possível carregar conquistas raras.",
+    "no_rares": "Carregando conquistas raras...",
+    "summary": "Jogos com conquistas raras: {{games}}",
+    "summary2": "Conquistas raras: {{achievements}}",
+    "total_for_game": "{{count}}",
+    "total_for_game_plural": "{{count}}",
+    "load_more": "Mostrar mais (+5)"
+  },
+  "settings": {
+    "title": "Configurações",
+    "avatar": "Escolha seu avatar",
+    "save": "Salvar Configurações",
+    "selectAvatar": "Selecionar Avatar",
+    "saveChanges": "Salvar Alterações",
+    "cancel": "Cancelar"
+  },
+  "search": {
+    "title": "Resultados da pesquisa para:",
+    "description": "Navegue pelos jogos que correspondem à sua consulta.",
+    "loading": "Carregando jogos...",
+    "error": "Ocorreu um erro ao buscar resultados.",
+    "noResults": "Nenhum jogo encontrado.",
+    "backHome": "Voltar para a página inicial",
+    "noCover": "Sem Capa"
+  },
+  "infoProfile": {
+    "msg": "Bem-vindo de volta!",
+    "profile": "Estatísticas do Perfil",
+    "latestGames": "Últimos Jogos",
+    "ownedGames": "Jogos",
+    "completedGames": "Concluídos",
+    "trophies": "Conquistas",
+    "hoursPlayed": "Horas",
+    "playing": "Jogando",
+    "average": "% Média",
+    "tipsGame": "Jogos que você possui",
+    "tipsTrophy": "Conquistas que você ganhou",
+    "tipsHours": "Total de horas jogadas em todos os jogos",
+    "tipsCompleted": "Jogos que você concluiu",
+    "tipsAverage": "Média de porcentagem de conquistas ganhas em seus jogos",
+    "tipsPlaying": "Jogos que você está jogando atualmente"
+  },
+  "homePage": {
+    "trending": "Tendências Recentes",
+    "trendingDescription": "Confira os últimos jogos em alta na comunidade!",
+    "comingSoon": "Em Breve",
+    "mostAnticipated": "Mais Esperados",
+    "seeMore": "Ver Mais"
   },
   "auth": {
     "login": "Entrar",
@@ -22,6 +77,73 @@
     "confirmPassword": "Confirmar Senha",
     "email": "Email",
     "forgotPassword": "Esqueci minha senha?",
-    "rememberMe": "Lembrar-me"
+    "rememberMe": "Lembrar-me",
+    "registerbtn": "Registrar",
+    "alreadyHaveAccount": "Já tem uma conta?",
+    "loginBtn": "Entrar",
+    "loginNow": "Entrar Agora",
+    "noAccount": "Não tem uma conta?",
+    "createAccount": "Criar Conta"
+  },
+  "anticipatedGames": {
+    "title": "Jogos Antecipados",
+    "description": "Estes são os lançamentos mais esperados"
+  },
+  "comingSoon": {
+    "title": " Jogos em Breve",
+    "description": "Estes jogos serão lançados em breve"
+  },
+  "gameDetails": {
+    "overview": "Resumo",
+    "platforms": "Plataformas",
+    "releaseDate": "Lançado em",
+    "genres": "Gêneros",
+    "similarGames": "Jogos Similares"
+  },
+  "about": {
+    "title": "Sobre",
+    "description01": "Bem-vindo ao Nexus, seu hub definitivo para acompanhar conquistas de jogos nas  principais plataformas: Steam, PlayStation Network e Xbox Live. Seja para celebrar marcos pessoais ou comparar suas estatísticas com a comunidade, nós centralizamos tudo em um só lugar",
+    "description02": "Nossa missão é oferecer uma interface intuitiva e atualizada em tempo real, para que você nunca perca nenhum troféu ou conquista importante. Se tiver sugestões, feedback ou quiser contribuir com o projeto, entre em contato com os desenvolvedores abaixo:"
+  },
+  "privacy": {
+    "title": "Política de Privacidade",
+    "intro": "Respeitamos sua privacidade e estamos comprometidos em proteger as informações pessoais que você compartilha conosco. Nesta política, explicamos quais dados coletamos, como usamos e suas opções de controle.",
+    "section1": {
+      "title": "1. Dados que Coletamos",
+      "items": [
+        "Informações de conta (nome, e-mail, avatar).",
+        "Dados de plataformas de jogos (Steam, PSN, Xbox) quando conectados.",
+        "Preferências e histórico de uso para melhorar nossa experiência."
+      ]
+    },
+    "section2": {
+      "title": "2. Como Usamos",
+      "items": [
+        "Para exibir suas conquistas em tempo real.",
+        "Para enviar notificações sobre marcos e novidades.",
+        "Para aprimorar e personalizar funcionalidades."
+      ]
+    },
+    "contact": "Para exercer qualquer um desses direitos, entre em contato em com nossa equipe de suporte"
+  },
+  "terms": {
+    "title": "Termos de Serviço",
+    "intro": "Ao usar nosso site para rastrear conquistas de jogos, você concorda com estes Termos de Serviço. Leia atentamente antes de prosseguir.",
+    "section1": {
+      "title": "1. Uso da Plataforma",
+      "items": [
+        "Você deve ter contas válidas nas plataformas suportadas (Steam, PSN, Xbox).",
+        "É proibido usar bots ou scrapers não autorizados para coletar dados.",
+        "Qualquer uso malicioso ou fraudulento resultará em banimento."
+      ]
+    },
+    "section2": {
+      "title": "2. Propriedade Intelectual",
+      "text": "Todo o conteúdo, design e código desta aplicação são protegidos por direitos autorais e pertencem à nossa equipe. É proibido copiar, modificar ou distribuir sem autorização."
+    },
+    "section3": {
+      "title": "3. Isenção de Responsabilidade",
+      "text": "Não garantimos a disponibilidade contínua das APIs de terceiros (Steam, PSN, Xbox). Eventuais interrupções estão fora do nosso controle."
+    }
   }
 }

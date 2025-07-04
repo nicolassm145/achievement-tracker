@@ -1,114 +1,148 @@
-import HeaderComponent from '../../../components/HeaderComponent';
 import { useTranslation } from 'react-i18next';
+import AuthComponent from '../../../components/AuthComponent';
+import axios from 'axios';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const RegisterPage = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+
+  const [formData, setFormData] = useState({
+    username: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
+  });
+
+  const [message, setMessage] = useState('');
+  const [success, setSuccess] = useState(false); // controla se o cadastro foi bem-sucedido
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (formData.password !== formData.confirmPassword) {
+      setMessage('As senhas não coincidem.');
+      return;
+    }
+
+    try {
+      await axios.post('http://localhost:8000/user/register', {
+        username: formData.username,
+        email: formData.email,
+        password: formData.password
+      });
+
+      setMessage('Cadastro realizado com sucesso! Redirecionando...');
+      setSuccess(true);
+
+      setTimeout(() => {
+        navigate('/login');
+      }, 2000);
+    } catch (err: any) {
+      setSuccess(false);
+      if (err.response && err.response.data.detail) {
+        setMessage(`Erro: ${err.response.data.detail}`);
+      } else {
+        setMessage('Erro ao registrar usuário.');
+      }
+    }
+  };
+
   return (
     <div className="flex min-h-screen flex-col bg-[url('/registerBG.png')] bg-cover bg-center">
-      <HeaderComponent />
+      <AuthComponent />
       <div className="flex flex-1 items-center justify-center px-4 sm:px-6 md:px-8 lg:px-10">
-        <div className="register-overlay flex w-full max-w-sm flex-col items-center rounded-lg p-6 shadow-md backdrop-blur-sm sm:max-w-md sm:p-8 md:max-w-lg md:p-10 lg:max-w-xl lg:p-12">
-          <h1 className="mb-6 text-center text-2xl font-bold tracking-tight">
+        <form onSubmit={handleSubmit} className="register-overlay flex w-full max-w-xs flex-col items-center rounded-lg p-8 shadow-md backdrop-blur-sm sm:max-w-md sm:p-10 md:max-w-lg md:p-12">
+          <a href="/">
+            <h1 className="font-righteous text-5xl">NEXUS</h1>
+          </a>
+          <h1 className="mt-10 mb-6 text-center text-2xl font-bold tracking-tight">
             {t('auth.register')}
           </h1>
 
           <div className="flex w-full flex-col items-center gap-2">
+            {/* campos de entrada */}
             <label className="input validator">
-              <svg
-                className="h-[1em] opacity-50"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-              >
-                <g
-                  strokeLinejoin="round"
-                  strokeLinecap="round"
-                  strokeWidth="2.5"
-                  fill="none"
-                  stroke="currentColor"
-                >
-                  <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
-                  <circle cx="12" cy="7" r="4"></circle>
-                </g>
-              </svg>
               <input
                 type="text"
-                required
+                name="username"
                 placeholder={t('auth.username')}
-                pattern="[A-Za-z][A-Za-z0-9\-]*"
+                required
                 minLength={3}
                 maxLength={30}
-                title="Only letters, numbers or dash"
+                pattern="[A-Za-z][A-Za-z0-9\-]*"
+                value={formData.username}
+                onChange={handleChange}
               />
             </label>
-             {/* Dps fazer modal */}
-            <p className="validator-hint hidden">
-              Must be 3 to 30 characters containing only letters, numbers or
-              dash
-            </p>
 
             <label className="input validator">
-              <svg
-                className="h-[1em] opacity-50"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-              >
-                <g
-                  strokeLinejoin="round"
-                  strokeLinecap="round"
-                  strokeWidth="2.5"
-                  fill="none"
-                  stroke="currentColor"
-                >
-                  <rect width="20" height="16" x="2" y="4" rx="2"></rect>
-                  <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
-                </g>
-              </svg>
-              <input type="email" placeholder={t('auth.email')} required />
+              <input
+                type="email"
+                name="email"
+                placeholder={t('auth.email')}
+                required
+                value={formData.email}
+                onChange={handleChange}
+              />
             </label>
-            <div className="validator-hint hidden">
-              Enter valid email address
-            </div>
 
             <label className="input validator">
-              <svg
-                className="h-[1em] opacity-50"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-              >
-                <g
-                  strokeLinejoin="round"
-                  strokeLinecap="round"
-                  strokeWidth="2.5"
-                  fill="none"
-                  stroke="currentColor"
-                >
-                  <path d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z"></path>
-                  <circle
-                    cx="16.5"
-                    cy="7.5"
-                    r=".5"
-                    fill="currentColor"
-                  ></circle>
-                </g>
-              </svg>
               <input
                 type="password"
-                required
+                name="password"
                 placeholder={t('auth.password')}
+                required
                 minLength={8}
                 pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-                title="Must be more than 8 characters, including number, lowercase letter, uppercase letter"
+                value={formData.password}
+                onChange={handleChange}
               />
             </label>
-            <p className="validator-hint hidden">
-              Must be more than 8 characters, including
-              <br />
-              At least one number <br />
-              At least one lowercase letter <br />
-              At least one uppercase letter
+
+            <label className="input validator">
+              <input
+                type="password"
+                name="confirmPassword"
+                placeholder={t('auth.confirmPassword')}
+                required
+                minLength={8}
+                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+              />
+            </label>
+
+            <button className="btn mt-6 w-1/2" type="submit">
+              {t('auth.registerbtn')}
+            </button>
+
+            <p className="justify-center px-2 text-center text-sm">
+              {t('auth.alreadyHaveAccount')} <br />
+              <a
+                href="/login"
+                className="text-primary hover:text-primary-focus underline"
+              >
+                {t('auth.loginNow')}
+              </a>
             </p>
+
+            {message && (
+              <p className={`text-sm text-center mt-2 ${success ? 'text-green-500' : 'text-red-500'}`}>
+                {message}
+              </p>
+            )}
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );
