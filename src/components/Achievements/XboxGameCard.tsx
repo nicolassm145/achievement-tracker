@@ -1,5 +1,4 @@
-// src/components/Achievements/XboxGameCard.tsx
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import GameCard, { type GameCardProps } from './GameCardComponent';
 import api from '../../services/api';
 
@@ -22,9 +21,6 @@ export default function XboxGameCard({ xboxId, title }: XboxGameCardProps) {
   const [trophyIcons, setTrophyIcons] = useState<string[] | null>(null);
   const [loadingAch, setLoadingAch] = useState(false);
   const [err, setErr] = useState<string | null>(null);
-  const [jogos, setJogos] = useState<XboxTitle[]>([]);
-  const [page, setPage] = useState(1);
-  const [loading, setLoading] = useState(false);
 
   const loadAchievements = async () => {
     if (trophyIcons !== null) return;
@@ -52,17 +48,6 @@ export default function XboxGameCard({ xboxId, title }: XboxGameCardProps) {
       setLoadingAch(false);
     }
   };
-
-  const fetchJogos = async (nextPage = 1) => {
-    setLoading(true);
-    const res = await api.get<{ jogos: XboxTitle[] }>(`/xbox/profile/games-with-full-achievements/${xboxId}?page=${nextPage}&limit=5`);
-    setJogos(prev => [...prev, ...res.data.jogos]);
-    setLoading(false);
-  };
-
-  useEffect(() => {
-    fetchJogos(1);
-  }, []);
 
   const cardProps: GameCardProps = {
     bannerUrl: title.icone || '',

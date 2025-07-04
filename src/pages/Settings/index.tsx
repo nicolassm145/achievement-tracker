@@ -1,36 +1,76 @@
 // src/pages/SettingsPage.tsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SystemLayout from '../../components/Layout/SystemLayout';
-import avatar from '../../assets/avatar.png';
+import defaultAvatar from '../../assets/avatar.png';
 import { useAuth } from '../../contexts/AuthContext';
 import { AdjustmentsHorizontalIcon } from '@heroicons/react/24/outline';
 import api from '../../services/api';
 
+// importa todas as imagens de avatar com Vite
+const avatarModules = import.meta.glob(
+  '../../assets/avatars/*.{png,jpg,jpeg,svg}',
+  { eager: true, import: 'default' }
+);
+const avatarImages = Object.values(avatarModules) as string[];
+
+const AVATAR_CACHE_KEY = 'selectedAvatar';
+
 const SettingsPage: React.FC = () => {
   const { user, setUser, loading } = useAuth();
+
+  // campos de ID (Steam/Xbox/PSN)...
   const [steamId, setSteamId] = useState('');
   const [xboxId, setXboxId] = useState('');
   const [psnId, setPsnId] = useState('');
   const [savingSteam, setSavingSteam] = useState(false);
   const [savingXbox, setSavingXbox] = useState(false);
+  const [savingPsn, setSavingPsn] = useState(false);
+
+  // avatar em front-only cache
+  const [selectedAvatar, setSelectedAvatar] = useState<string | null>(null);
+  const [showAvatarModal, setShowAvatarModal] = useState(false);
+
+  // feedback
   const [error, setError] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
 
+  // ao montar, carrega valores do usuário e do cache
+  useEffect(() => {
+    if (user) {
+      setSteamId(user.steamid ?? '');
+      setXboxId(user.xboxId ?? '');
+      setPsnId(user.psnId ?? '');
+    }
+    const cached = sessionStorage.getItem(AVATAR_CACHE_KEY);
+    if (cached) {
+      setSelectedAvatar(cached);
+    }
+  }, [user]);
+
+  // salva avatar no sessionStorage e atualiza estado
+  const handleConfirmAvatar = () => {
+    if (!selectedAvatar) return;
+    sessionStorage.setItem(AVATAR_CACHE_KEY, selectedAvatar);
+
+    setMessage('Avatar definido!');
+    setShowAvatarModal(false);
+  };
+
+  // handlers de Steam/Xbox/PSN ...
   const handleSaveSteam = async () => {
     setError(null);
     setMessage(null);
     setSavingSteam(true);
     try {
-      const response = await api.post<{ steamid: string }>(
+      const resp = await api.post<{ steamid: string }>(
         '/steam/save-steamid',
         {},
         { params: { vanity_url: steamId } }
       );
-      const { steamid } = response.data;
+      const { steamid } = resp.data;
       setUser((prev) => (prev ? { ...prev, steamid } : prev));
       setMessage('SteamID vinculado com sucesso!');
     } catch (err: any) {
-      console.error(err);
       setError(
         err.response?.data?.detail || err.message || 'Erro ao salvar SteamID'
       );
@@ -38,21 +78,16 @@ const SettingsPage: React.FC = () => {
       setSavingSteam(false);
     }
   };
-
   const handleSaveXbox = async () => {
     setError(null);
     setMessage(null);
     setSavingXbox(true);
-
     try {
-      // 1) Busca XUID a partir do gamertag
       const {
         data: { xuid },
       } = await api.get<{ xuid: string }>(
         `/xbox/profile/xuid/${encodeURIComponent(xboxId)}`
       );
-
-      // 2) Envia o XUID diretamente como parâmetro para a rota
       const {
         data: { xboxid },
       } = await api.post<{ xboxid: string }>(
@@ -60,17 +95,36 @@ const SettingsPage: React.FC = () => {
         {},
         { params: { xboxid: xuid } }
       );
-
-      // 3) Atualiza contexto e feedback
       setUser((prev) => (prev ? { ...prev, xboxId: xboxid } : prev));
       setMessage('Xbox ID vinculado com sucesso!');
     } catch (err: any) {
-      console.error(err.response?.data || err);
       setError(
         err.response?.data?.detail || err.message || 'Erro ao salvar Xbox ID'
       );
     } finally {
       setSavingXbox(false);
+    }
+  };
+  const handleSavePsn = async () => {
+    setError(null);
+    setMessage(null);
+    setSavingPsn(true);
+    try {
+      const {
+        data: { psnid },
+      } = await api.post<{ psnid: string }>(
+        '/psn/save-psnid',
+        {},
+        { params: { psnid: psnId } }
+      );
+      setUser((prev) => (prev ? { ...prev, psnId: psnid } : prev));
+      setMessage('PSN ID vinculado com sucesso!');
+    } catch (err: any) {
+      setError(
+        err.response?.data?.detail || err.message || 'Erro ao salvar PSN ID'
+      );
+    } finally {
+      setSavingPsn(false);
     }
   };
 
@@ -86,6 +140,7 @@ const SettingsPage: React.FC = () => {
 
   return (
     <SystemLayout>
+      {/* Banner */}
       <div className="relative -mt-20 h-54 w-full sm:h-64 md:h-96 lg:h-128">
         <img
           src="/profileBG.png"
@@ -95,22 +150,30 @@ const SettingsPage: React.FC = () => {
         <div className="via-black-100/80 to-base-100 absolute inset-0 bg-gradient-to-b from-transparent" />
       </div>
 
+      {/* Card de configurações */}
       <div className="relative mx-auto -mt-8 px-4 sm:-mt-32 sm:px-8 md:-mt-36 lg:-mt-40 lg:px-36">
         <div className="profile-card bg-base-100 rounded-lg p-6 shadow-xl">
+          {/* Avatar e botão */}
           <div className="flex flex-col items-center space-y-4 sm:flex-row sm:space-y-0 sm:space-x-6 md:items-start">
             <img
               alt="Avatar do usuário"
-              src={avatar}
-              className="border-base-100 -mt-20 h-32 w-32 rounded border-4 shadow-md"
+              src={selectedAvatar ?? defaultAvatar}
+              className="border-base-100 -mt-20 h-32 w-32 rounded border-4 object-cover shadow-md"
             />
 
             <div className="flex-1">
-              <h1 className="-ml-1 text-xl font-bold sm:-mt-16 sm:text-2xl md:text-3xl lg:-mt-15">
+              <h1 className="text-xl font-bold sm:text-2xl md:text-3xl">
                 {user?.username ?? 'Usuário'}
               </h1>
             </div>
+            <button
+              onClick={() => setShowAvatarModal(true)}
+              className="btn btn-outline btn-sm mt-2 sm:mt-0"
+            >
+              Trocar Avatar
+            </button>
             <a href="/profile">
-              <AdjustmentsHorizontalIcon className="ml-auto w-10 cursor-pointer" />
+              <AdjustmentsHorizontalIcon className="w-10 cursor-pointer" />
             </a>
           </div>
 
@@ -165,7 +228,7 @@ const SettingsPage: React.FC = () => {
             </div>
           </div>
 
-          {/* PSN ID (idem) */}
+          {/* PSN ID */}
           <div className="form-control mb-6 w-full sm:w-3/4 md:w-1/2 lg:w-1/3">
             <label className="label">
               <span className="label-text">PSN ID</span>
@@ -178,16 +241,57 @@ const SettingsPage: React.FC = () => {
                 value={psnId}
                 onChange={(e) => setPsnId(e.target.value)}
               />
-              <button className="btn btn-info">Salvar</button>
+              <button
+                className="btn btn-info"
+                onClick={handleSavePsn}
+                disabled={savingPsn}
+              >
+                {savingPsn ? 'Salvando…' : 'Salvar'}
+              </button>
             </div>
           </div>
 
+          {/* Feedback */}
           {error && <p className="mt-2 text-sm text-red-500">❌ {error}</p>}
           {message && (
             <p className="mt-2 text-sm text-green-500">✅ {message}</p>
           )}
         </div>
       </div>
+
+      {/* Modal de seleção de avatar */}
+      {showAvatarModal && (
+        <div className="bg-opacity-50 fixed inset-0 z-50 flex items-center justify-center bg-black">
+          <div className="w-full max-w-lg rounded-lg bg-white p-6">
+            <h3 className="mb-4 text-lg font-semibold">Escolha seu avatar</h3>
+            <div className="grid max-h-80 grid-cols-4 gap-4 overflow-y-auto">
+              {avatarImages.map((src, idx) => (
+                <img
+                  key={idx}
+                  src={src}
+                  alt={`Avatar ${idx}`}
+                  className={`h-16 w-16 cursor-pointer rounded-full object-cover transition-transform ${
+                    selectedAvatar === src ? 'ring-primary ring-4' : ''
+                  }`}
+                  onClick={() => setSelectedAvatar(src)}
+                />
+              ))}
+            </div>
+            <div className="mt-6 flex justify-end gap-2">
+              <button className="btn" onClick={() => setShowAvatarModal(false)}>
+                Cancelar
+              </button>
+              <button
+                className="btn btn-primary"
+                onClick={handleConfirmAvatar}
+                disabled={!selectedAvatar}
+              >
+                Confirmar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </SystemLayout>
   );
 };

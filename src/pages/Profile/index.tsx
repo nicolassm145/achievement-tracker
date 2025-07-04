@@ -1,5 +1,5 @@
 import SystemLayout from '../../components/Layout/SystemLayout';
-import avatar from '../../assets/avatar.png';
+import defaultAvatar from '../../assets/avatar.png';
 import { useAuth } from '../../contexts/AuthContext';
 import { AdjustmentsHorizontalIcon } from '@heroicons/react/24/outline';
 import SteamComponent from '../../components/Achievements/SteamComponent';
@@ -39,7 +39,7 @@ const ProfilePage: React.FC = () => {
           <div className="flex flex-col items-center space-y-4 sm:flex-row sm:space-y-0 sm:space-x-6 md:items-start">
             <img
               alt="Avatar do usuário"
-              src={avatar}
+              src={user?.avatarUrl ?? defaultAvatar}
               className="border-base-100 -mt-20 h-32 w-32 rounded border-4 shadow-md"
             />
 

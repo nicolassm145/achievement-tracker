@@ -10,13 +10,14 @@ type UserRaw = {
   psn_id?: string;
 };
 
-// Normalized user type
+
 export interface User {
   id: number;
   username: string;
   steamid?: string;
   xboxId?: string;
   psnId?: string;
+  avatarUrl?: string;
 }
 
 interface AuthContextType {
@@ -41,6 +42,7 @@ export const AuthProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }
   const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(() => localStorage.getItem('access_token'));
   const [loading, setLoading] = useState(true);
+ 
 
   // Whenever token changes, update axios header
   useEffect(() => {
@@ -53,6 +55,8 @@ export const AuthProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }
     }
   }, [token]);
 
+  const AVATAR_CACHE_KEY = 'selectedAvatar';
+
   useEffect(() => {
     (async () => {
       if (!token) {
@@ -63,12 +67,14 @@ export const AuthProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }
       try {
         const resp = await api.get<UserRaw>('/user/me');
         const raw = resp.data;
+        const cachedAvatar = sessionStorage.getItem(AVATAR_CACHE_KEY) ?? undefined;
         const normalized: User = {
           id: raw.id,
           username: raw.username,
           steamid: raw.steam_id,
           xboxId: raw.xbox_id,
           psnId: raw.psn_id,
+          avatarUrl: cachedAvatar,
         };
         setUser(normalized);
       } catch {

@@ -37,49 +37,57 @@ const InfoComponent: React.FC = () => {
       }
       const sid = user.steamid;
 
-      // Tentar cache
-      const cachedStats = sessionStorage.getItem(STATS_CACHE_KEY(sid));
-      const cachedGames = sessionStorage.getItem(GAMES_CACHE_KEY(sid));
-      let allGames: Game[] = [];
-
-      if (cachedStats && cachedGames) {
-        try {
-          setStats(JSON.parse(cachedStats));
-          allGames = JSON.parse(cachedGames);
-        } catch {
-          // cache corrompido -> continuar
-        }
+      // 1) Ler do cache
+      const rawStats = sessionStorage.getItem(STATS_CACHE_KEY(sid));
+      const parsedStats = rawStats
+        ? (JSON.parse(rawStats) as GeneralStats)
+        : null;
+      if (parsedStats) {
+        setStats(parsedStats);
       }
 
       try {
-        if (!allGames.length) {
-          // fetch Steam
-          const gamesRes = await api.get<{ games: Game[] }>(`/steam/profile/games/${sid}`);
+        // 2) Buscar lista de jogos (se não tiver no cache)
+        let allGames: Game[] = [];
+        const rawGames = sessionStorage.getItem(GAMES_CACHE_KEY(sid));
+        if (rawGames) {
+          allGames = JSON.parse(rawGames);
+        } else {
+          const gamesRes = await api.get<{ games: Game[] }>(
+            `/steam/profile/games/${sid}`
+          );
           allGames = gamesRes.data.games || [];
-          sessionStorage.setItem(GAMES_CACHE_KEY(sid), JSON.stringify(allGames));
+          sessionStorage.setItem(
+            GAMES_CACHE_KEY(sid),
+            JSON.stringify(allGames)
+          );
         }
 
-        let general = stats;
+        // 3) Buscar estatísticas gerais (se não tiver no cache)
+        let general = parsedStats;
         if (!general) {
-          const statsRes = await api.get<{ general_stats: GeneralStats }>(`/steam/general-stats/${sid}`);
+          const statsRes = await api.get<{
+            general_stats: GeneralStats;
+          }>(`/steam/general-stats/${sid}`);
           general = statsRes.data.general_stats;
           sessionStorage.setItem(STATS_CACHE_KEY(sid), JSON.stringify(general));
           setStats(general);
         }
 
-        // Filtrar top 4 jogados últimas 2 weeks
+        // 4) Processar os 4 jogos mais jogados nas últimas 2 semanas
         const recent = allGames
-          .filter(g => g.playtime_2weeks > 0)
+          .filter((g) => g.playtime_2weeks > 0)
           .sort((a, b) => b.playtime_2weeks - a.playtime_2weeks)
           .slice(0, 4);
 
-        // Buscar cover via IGDB
+        // 5) Buscar capas via IGDB
         const gamesWithCover = await Promise.all(
           recent.map(async (g) => {
             try {
-              const resp = await api.get<{ id: number; name: string; cover_url?: string }[]>('/igdb/search', { params: { q: g.name } });
-              const igdb = resp.data[0];
-              return { ...g, cover_url: igdb?.cover_url };
+              const resp = await api.get<
+                { id: number; name: string; cover_url?: string }[]
+              >('/igdb/search', { params: { q: g.name } });
+              return { ...g, cover_url: resp.data[0]?.cover_url };
             } catch {
               return g;
             }
@@ -97,11 +105,18 @@ const InfoComponent: React.FC = () => {
   }, [user, token]);
 
   if (authLoading || loading) {
-    return <p className="text-center mt-10">{t('loading')}</p>;
+    return (
+      <div className="mt-10 flex items-center text-2xl gap-2">
+        <span className="loading loading-spinner loading-xs"></span>
+        <span className="text-sm font-semibold">Carregando Informações</span>
+      </div>
+    );
   }
 
   if (!stats) {
-    return <p className="text-center mt-10 text-red-500">{t('infoProfile.error')}</p>;
+    return (
+      <p className="mt-10 text-center text-red-500">{t('infoProfile.error')}</p>
+    );
   }
 
   // Converter minutos para Xh Ym
@@ -109,7 +124,7 @@ const InfoComponent: React.FC = () => {
   const minutes = stats.total_hours % 60;
   const formattedHours = `${hours}h ${minutes}m`;
 
-  // Garantir 4 slots
+  // Garantir ao menos 4 slots no carrossel
   const displayGames = [...latestGames];
   while (displayGames.length < 3) displayGames.push(null as any);
 
@@ -118,17 +133,44 @@ const InfoComponent: React.FC = () => {
       <div className="container mx-auto mt-10 px-4">
         <p className="mb-6 text-center text-base sm:text-lg">
           {t('infoProfile.msg')}
-          <a className="text-blue-500 font-bold" href="/profile"> {user?.username ?? 'Usuário'} </a>
+          <a className="font-bold text-blue-500" href="/profile">
+            {' '}
+            {user?.username ?? 'Usuário'}{' '}
+          </a>
         </p>
 
         <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
           <div className="grid grid-cols-2 gap-x-15 gap-y-4 sm:grid-cols-3 lg:grid-cols-3">
-            <Stat label={t('infoProfile.ownedGames')} tip={t('infoProfile.tipsGame')} value={stats.total_games} />
-            <Stat label={t('infoProfile.completedGames')} tip={t('infoProfile.tipsCompleted')} value={stats.total_platinums} />
-            <Stat label={t('infoProfile.playing')} tip={t('infoProfile.tipsPlaying')} value={stats.recent_games} />
-            <Stat label={t('infoProfile.trophies')} tip={t('infoProfile.tipsTrophy')} value={stats.total_achievements} />
-            <Stat label={t('infoProfile.hoursPlayed')} tip={t('infoProfile.tipsHours')} value={formattedHours} />
-            <Stat label={t('infoProfile.average')} tip={t('infoProfile.tipsAverage')} value={`${stats.avg_platinums}%`} />
+            <Stat
+              label={t('infoProfile.ownedGames')}
+              tip={t('infoProfile.tipsGame')}
+              value={stats.total_games}
+            />
+            <Stat
+              label={t('infoProfile.completedGames')}
+              tip={t('infoProfile.tipsCompleted')}
+              value={stats.total_platinums}
+            />
+            <Stat
+              label={t('infoProfile.playing')}
+              tip={t('infoProfile.tipsPlaying')}
+              value={stats.recent_games}
+            />
+            <Stat
+              label={t('infoProfile.trophies')}
+              tip={t('infoProfile.tipsTrophy')}
+              value={stats.total_achievements}
+            />
+            <Stat
+              label={t('infoProfile.hoursPlayed')}
+              tip={t('infoProfile.tipsHours')}
+              value={formattedHours}
+            />
+            <Stat
+              label={t('infoProfile.average')}
+              tip={t('infoProfile.tipsAverage')}
+              value={`${stats.avg_platinums}%`}
+            />
             <div className="col-span-full flex justify-center text-sm sm:text-base">
               <p>{t('infoProfile.profile')}</p>
             </div>
@@ -142,15 +184,17 @@ const InfoComponent: React.FC = () => {
                     <img
                       src={game.cover_url}
                       alt={game.name}
-                      className="h-24 w-16 rounded-lg shadow-lg object-cover hover:scale-105 transition-transform sm:h-32 sm:w-24"
+                      className="h-24 w-16 rounded-lg object-cover shadow-lg transition-transform hover:scale-105 sm:h-32 sm:w-24"
                     />
                   ) : (
-                    <div className="h-24 w-16 bg-gray-200 rounded-lg shadow-lg sm:h-32 sm:w-24" />
+                    <div className="h-24 w-16 rounded-lg bg-gray-200 shadow-lg sm:h-32 sm:w-24" />
                   )}
                 </div>
               ))}
             </div>
-            <p className="mt-2 text-center text-sm sm:text-base">{t('infoProfile.latestGames')}</p>
+            <p className="mt-2 text-center text-sm sm:text-base">
+              {t('infoProfile.latestGames')}
+            </p>
           </div>
         </div>
       </div>
