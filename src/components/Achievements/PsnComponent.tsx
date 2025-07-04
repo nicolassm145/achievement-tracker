@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 
 const PsnComponent: React.FC = () => {
-  const [error, setError] = useState<string | null>(null);
+  const [error ,setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // Simula o carregamento que falha após 5 segundos
     const timer = setTimeout(() => {
+      console.log(error);
       setError('Falha ao carregar títulos PSN.');
       setLoading(false);
     }, 5000);

@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
-import api from '../../services/api';
-import XboxGameCard from './XboxGameCard';
 import { useXboxAllAchievements } from '../../hooks/useXboxFullAchievements';
 
 interface XboxTitle {
