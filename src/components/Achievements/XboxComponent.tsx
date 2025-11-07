@@ -25,7 +25,6 @@ const XboxComponent: React.FC = () => {
     }
   }, [user?.xboxId]);
 
- 
   if (loading) return <div>Loading profile...</div>;
   if (!user?.xboxId) {
     return (
@@ -37,8 +36,7 @@ const XboxComponent: React.FC = () => {
     );
   }
   if (error) return <div className="text-red-500">{error}</div>;
-  if (games.length === 0 && loadingGames)
-    return <div>Loading games...</div>;
+  if (games.length === 0 && loadingGames) return <div>Loading games...</div>;
   if (games.length === 0) return <div>Nenhum jogo 100% encontrado.</div>;
 
   return (
@@ -90,7 +88,6 @@ const XboxComponent: React.FC = () => {
                   )}
                 </ul>
 
-                
                 {!loadingGames && shown >= achs.length && (
                   <div className="mt-2 text-center text-gray-500">
                     All achievements displayed.
