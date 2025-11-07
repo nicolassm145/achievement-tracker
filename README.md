@@ -1,4 +1,4 @@
-# 🎮 Achievement Tracker - NEXUS
+#  Achievement Tracker - NEXUS
 
 <div align="center">
 
@@ -150,7 +150,7 @@ VITE_API_BASE_URL=https://sua-api-backend.com
 
 ---
 
-## 📁 Estrutura do Projeto
+##  Estrutura do Projeto
 
 ```
 achievement-tracker/
@@ -222,7 +222,7 @@ achievement-tracker/
 
 ---
 
-## 👥 Contribuidores
+##  Contribuidores
 
 <table>
   <tr>
@@ -245,13 +245,13 @@ achievement-tracker/
 
 ---
 
-## 📝 Licença
+##  Licença
 
 Este projeto está licenciado sob a **Licença MIT** - veja o arquivo [LICENSE](LICENSE) para detalhes.
 
 ---
 
-## 🔗 Links
+##  Links
 
 - **Repositório**: [github.com/nicolassm145/achievement-tracker](https://github.com/nicolassm145/achievement-tracker)
 - **Demo ao Vivo**: [achievement-tracker.vercel.app](https://achievement-tracker.vercel.app)
