@@ -35,7 +35,8 @@ const RegisterPage = () => {
     }
 
     try {
-      await axios.post('http://localhost:8000/user/register', {
+      const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+      await axios.post(`${apiBaseUrl}/user/register`, {
         username: formData.username,
         email: formData.email,
         password: formData.password
