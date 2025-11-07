@@ -12,8 +12,9 @@ export function useGameDetails(gameId: number) {
     async function fetchGameDetails() {
       try {
         setLoading(true);
+        const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
         // CORREÇÃO: Adicione /igdb no caminho
-        const res = await fetch(`http://localhost:8000/igdb/games/${gameId}`);
+        const res = await fetch(`${apiBaseUrl}/igdb/games/${gameId}`);
         
         console.log(`Status: ${res.status}`); // Log para depuração
         
