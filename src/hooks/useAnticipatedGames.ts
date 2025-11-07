@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import type { Game } from "../types/Game";
+import { useState, useEffect } from 'react';
+import type { Game } from '../types/Game';
 
 export function useAnticipatedGames() {
   const [games, setGames] = useState<Game[]>([]);
@@ -10,13 +10,14 @@ export function useAnticipatedGames() {
     async function fetchGames() {
       try {
         setLoading(true);
-        const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+        const apiBaseUrl =
+          import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
         const res = await fetch(`${apiBaseUrl}/igdb/anticipated`);
         if (!res.ok) throw new Error(`Status ${res.status}`);
         const data: Game[] = await res.json();
         setGames(data);
       } catch (err: any) {
-        setError(err.message ?? "Erro desconhecido");
+        setError(err.message ?? 'Erro desconhecido');
       } finally {
         setLoading(false);
       }

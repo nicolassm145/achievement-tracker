@@ -2,13 +2,13 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000', 
-   headers: {
+  baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000',
+  headers: {
     'Content-Type': 'application/json',
   },
 });
 
-api.interceptors.request.use(config => {
+api.interceptors.request.use((config) => {
   const token = localStorage.getItem('access_token');
   if (token) {
     if (!config.headers) {
@@ -41,31 +41,41 @@ api.interceptors.response.use(
         message: error.message,
       });
     }
-  },
-  
+  }
 );
 
 // ao logar:
 export function setToken(token: string) {
-  localStorage.setItem("access_token", token);
-  api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  localStorage.setItem('access_token', token);
+  api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 }
 
 // ao iniciar a aplicação, se já houver token:
-const token = localStorage.getItem("access_token");
+const token = localStorage.getItem('access_token');
 if (token) {
-  api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 }
 
-export const getXboxGamesWithFullAchievements = async (xuid: string, page = 1, limit = 5) => {
-  const response = await api.get(`/xbox/profile/games-with-full-achievements/${xuid}?page=${page}&limit=${limit}`);
+export const getXboxGamesWithFullAchievements = async (
+  xuid: string,
+  page = 1,
+  limit = 5
+) => {
+  const response = await api.get(
+    `/xbox/profile/games-with-full-achievements/${xuid}?page=${page}&limit=${limit}`
+  );
   return response.data;
 };
 
-export const getXboxAllAchievements = async (xuid: string, page = 1, limit = 5) => {
-  const response = await api.get(`/xbox/profile/achievements/all/${xuid}?page=${page}&limit=${limit}`);
+export const getXboxAllAchievements = async (
+  xuid: string,
+  page = 1,
+  limit = 5
+) => {
+  const response = await api.get(
+    `/xbox/profile/achievements/all/${xuid}?page=${page}&limit=${limit}`
+  );
   return response.data;
 };
 
 export default api;
-
