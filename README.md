@@ -254,7 +254,7 @@ Este projeto está licenciado sob a **Licença MIT** - veja o arquivo [LICENSE](
 ##  Links
 
 - **Repositório**: [github.com/nicolassm145/achievement-tracker](https://github.com/nicolassm145/achievement-tracker)
-- **Demo ao Vivo**: [achievement-tracker.vercel.app](https://achievement-tracker.vercel.app)
+- **Demo ao Vivo**: [Nexus](https://nexus-achievement-tracker.vercel.app)
 - **API Backend**: [Render](https://tracker-api-h5uk.onrender.com/docs)
 
 ---
